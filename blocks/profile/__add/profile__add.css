@@ -1,0 +1,21 @@
+.profile__add {
+  background-color: black;
+  height: 50px;
+  width: 150px;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  background-image: url(../../../images/plus.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media screen and (max-width: 1040px) {
+  .profile__add {
+    width: 100px;
+  }
+}
+@media screen and (max-width: 440px) {
+  .profile__add {
+    width: 100%;
+  }
+}

@@ -1,0 +1,28 @@
+.profile__subtitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.22;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  align-self: center;
+}
+
+@media screen and (max-width: 1040px) {
+  .profile__status {
+  font-size: 14px;
+  line-height: 1.21;
+}
+}
+
+@media screen and (max-width: 770px) {
+  .profile__status {
+    align-self: flex-start;
+}
+}
+
+@media screen and (max-width: 440px) {
+  .profile__status {
+    align-self: center;
+}
+}

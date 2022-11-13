@@ -1,0 +1,36 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts/fonts.css);
+
+@import url(../blocks/page/page.css);
+@import url(../blocks/page/__header/page__header.css);
+@import url(../blocks/page/__content/page__content.css);
+@import url(../blocks/page/__footer/page__footer.css);
+
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+
+@import url(../blocks/content/content.css);
+@import url(../blocks/content/__profile/content__profile.css);
+
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__title-box/profile__title-box.css);
+@import url(../blocks/profile/__title/profile__title.css);
+@import url(../blocks/profile/__edit/profile__edit.css);
+@import url(../blocks/profile/__subtitle/profile__subtitle.css);
+@import url(../blocks/profile/__add/profile__add.css);
+
+@import url(../blocks/places/places.css);
+@import url(../blocks/places/__item/places__item.css);
+@import url(../blocks/places/__image/places__image.css);
+@import url(../blocks/places/__info/places__info.css);
+@import url(../blocks/places/__title/places__title.css);
+@import url(../blocks/places/__like/places__like.css);
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+
+/* * {
+  outline: red 1px solid;
+} */

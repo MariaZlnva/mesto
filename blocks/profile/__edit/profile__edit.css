@@ -1,0 +1,18 @@
+.profile__edit {
+  background-color: black;
+  border: 1px solid #FFFFFF;
+  background-image: url(../../../images/pen.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+    height: 24px;
+  width: 24px;
+  
+  
+ }
+
+ @media screen and (max-width: 760px) {
+  .profile__edit {
+    height: 18px;
+    width: 18px;
+  }
+}
