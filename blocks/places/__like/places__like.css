@@ -3,5 +3,10 @@
   width: 22px;
   background-image: url(../../../images/heart.svg);
   background-repeat: no-repeat;
+  background-size: contain;
   
+}
+
+.places__like:hover {
+  background-image: url(../../../images/heart-active.svg);
 }
