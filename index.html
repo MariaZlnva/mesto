@@ -17,17 +17,31 @@
         <img src="./images/kusto.jpg" alt="Аватарка" class="profile__avatar">
         <div class="profile__title-box">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <button class="profile__edit"></button>
+          <button class="profile__edit"><img src="./images/pen.svg"></button>
         </div>
         <h2 class="profile__subtitle">Исследователь океана</h2>
       </div>
-      <button class="profile__add"></button>
+      <button class="profile__add" type="button"><img src="./images/plus.svg" alt="Добавить" class="profile__add-image"> </button>
     </section>
     <section class="places">
       <article class="places__item">
-        <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="places__image">
+        <img src="./images/vorgol.jpg" alt="Воргольские скалы" class="places__image">
         <div class="places__info">
-          <h2 class="places__title">Гора Эльбрус</h2>
+          <h2 class="places__title">Воргольские скалы</h2>
+          <div class="places__like"></div>
+        </div>
+      </article>
+      <article class="places__item">
+        <img src="./images/kalyazin-2.jpg" alt="Калязин" class="places__image">
+        <div class="places__info">
+          <h2 class="places__title">Калязин</h2>
+          <div class="places__like"></div>
+        </div>
+      </article>
+      <article class="places__item">
+        <img src="./images/vdnh.jpg" alt="ВДНХ" class="places__image">
+        <div class="places__info">
+          <h2 class="places__title">ВДНХ</h2>
           <div class="places__like"></div>
         </div>
       </article>
@@ -46,20 +60,6 @@
         </div>
       </article>
       <article class="places__item">
-        <img src="./images/vorgol.jpg" alt="Воргольские скалы" class="places__image">
-        <div class="places__info">
-          <h2 class="places__title">Воргольские скалы</h2>
-          <div class="places__like"></div>
-        </div>
-      </article>
-      <article class="places__item">
-        <img src="./images/kalyazin-2.jpg" alt="Калязин" class="places__image">
-        <div class="places__info">
-          <h2 class="places__title">Калязин</h2>
-          <div class="places__like"></div>
-        </div>
-      </article>
-      <article class="places__item">
         <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="places__image">
         <div class="places__info">
           <h2 class="places__title">Гора Эльбрус</h2>
@@ -71,6 +71,19 @@
   <footer class="footer page__footer">
     <p class="footer__copyright">© 2022 Mesto Russia</p>
   </footer>
-  
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close" type="button"><img src="./images/close-icon.svg" alt="Закрыть" class="popup__close-image"></button>
+      <div class="popup__content">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__inputs" name="aboutUser">
+          <input class="popup__input popup__input_name" type="text" name="aboutUser" value="">
+          <input class="popup__input popup__input_info" type="text" name="aboutUser" value="">
+          <button class="popup__button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="./scripts/index.js"></script>
  </body>
 </html>

@@ -1,15 +1,16 @@
 .profile__add {
-  background-color: black;
   height: 50px;
   width: 150px;
+  background-color: black;
   border: 2px solid #ffffff;
-  border-radius: 2px;
-  background-image: url(../../../images/plus.svg);
-  background-repeat: no-repeat;
-  background-position: center;
+  cursor: pointer;
 }
 
-@media screen and (max-width: 1040px) {
+.profile__add:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 1100px) {
   .profile__add {
     width: 100px;
   }
