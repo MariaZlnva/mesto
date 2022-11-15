@@ -19,7 +19,5 @@
 * Cпециальные правила для разных размеров экранов заданы помощью media queries.
 
 
-
-
-https://mariazlnva.github.io/russian-travel/
+ https://mariazlnva.github.io/mesto/
 
