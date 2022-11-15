@@ -1,17 +1,16 @@
 .page__header {
-margin: 0 200px;
-
+  margin: 0 200px;
 }
 
-@media screen and (max-width: 980px){
+@media screen and (max-width: 980px) {
   .page__header {
-   margin: 0 100px;
+    margin: 0 100px;
   }
 }
 
-@media screen and (max-width: 670px){
+@media screen and (max-width: 670px) {
   .page__header {
-   margin: 0;
-   padding: 0 27px;
+    margin: 0;
+    padding: 0 27px;
   }
 }

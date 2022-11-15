@@ -10,19 +10,19 @@
 
 @media screen and (max-width: 1040px) {
   .profile__status {
-  font-size: 14px;
-  line-height: 1.21;
-}
+    font-size: 14px;
+    line-height: 1.21;
+  }
 }
 
 @media screen and (max-width: 770px) {
   .profile__status {
     align-self: flex-start;
-}
+  }
 }
 
 @media screen and (max-width: 440px) {
   .profile__status {
     align-self: center;
-}
+  }
 }

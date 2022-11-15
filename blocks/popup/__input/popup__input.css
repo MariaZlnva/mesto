@@ -5,19 +5,17 @@
   font-family: "Inter", "Arial", sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: 1.21;  
+  line-height: 1.21;
   padding-bottom: 9px;
   padding-top: 11px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   height: 34px;
-    box-sizing: border-box;
-
+  box-sizing: border-box;
 }
 
 .popup__input:focus {
   outline: 2px solid rgb(93 151 227);
   border-radius: 2px;
- }
-
+}
