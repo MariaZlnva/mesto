@@ -4,8 +4,14 @@
   background-image: url(../../../images/heart.svg);
   background-repeat: no-repeat;
   background-size: contain;
+  border: none;
+  cursor: pointer;
 }
 
 .places__like:hover {
+  background-image: url(../../../images/heart_hover.svg);
+}
+
+.places__like:active {
   background-image: url(../../../images/heart-active.svg);
 }

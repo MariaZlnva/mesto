@@ -1,7 +1,6 @@
 .profile__info {
   display: grid;
   grid-template-columns: repeat(3, minmax(min-content, max-content));
-  grid-template-rows: repeat(2, 1fr);
 }
 
 @media screen and (max-width: 760px) {

@@ -8,9 +8,6 @@
   line-height: 1.21;
   padding-bottom: 9px;
   padding-top: 11px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
   height: 34px;
   box-sizing: border-box;
 }

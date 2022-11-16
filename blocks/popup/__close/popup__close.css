@@ -1,5 +1,10 @@
 .popup__close {
-  background-color: black;
+  background-image: url(../../../images/close-icon.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 32px;
+  width: 32px;
+  background-color: rgba(0, 0, 0, 0);
   position: absolute;
   right: -40px;
   top: -40px;
@@ -18,5 +23,7 @@
   .popup__close {
     right: 0px;
     top: -36px;
+    width: 20px;
+    height: 20px;
   }
 }

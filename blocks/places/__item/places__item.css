@@ -3,6 +3,6 @@
   flex-direction: column;
   max-width: 282px;
   min-width: 100%;
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 10px;
   overflow: hidden;
 }

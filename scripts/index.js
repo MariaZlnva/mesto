@@ -11,7 +11,9 @@ const nameInput = formElement.querySelector(".popup__input_name");
 const infoInput = formElement.querySelector(".popup__input_info");
 
 
-const popupOpen = function () {
+const popupOpen = function (evt) {
+  
+  
   popupElement.classList.add("popup_opened");
 
   nameInput.value = profileName.textContent;
@@ -23,6 +25,7 @@ const popupClose = function () {
 }
 
 function formSubmitHandler(evt) {
+  evt.preventDefault();
   nameInput.value;
   infoInput.value;
 
@@ -30,7 +33,7 @@ function formSubmitHandler(evt) {
   profileInfo.textContent = infoInput.value;
 
   popupClose();
-}
+  }
 
 formElement.addEventListener("submit", formSubmitHandler);
 
