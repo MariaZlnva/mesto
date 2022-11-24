@@ -1,3 +1,8 @@
 .popup_opened {
   display: flex;
+
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0.5s linear, opacity .5s linear;
+ 
 }
