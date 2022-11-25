@@ -25,13 +25,13 @@
     </section>
     <section class="places" aria-label="Публикации">
       <article class="places__item">
-        <img src="./images/vorgol.jpg" alt="Воргольские скалы" class="places__image">
+        <img src="" alt="" class="places__image">
         <div class="places__info">
-          <h2 class="places__title">Воргольские скалы</h2>
+          <h2 class="places__title"></h2>
           <button aria-label="Нравится" class="places__like" type="button"></button>
         </div>
       </article>
-      <article class="places__item">
+      <!-- <article class="places__item">
         <img src="./images/kalyazin-2.jpg" alt="Калязин" class="places__image">
         <div class="places__info">
           <h2 class="places__title">Калязин</h2>
@@ -65,7 +65,7 @@
           <h2 class="places__title">Гора Эльбрус</h2>
           <button aria-label="Нравится" class="places__like" type="button"></button>
         </div>
-      </article>
+      </article> -->
     </section>
   </main>
   <footer class="footer page__footer">
@@ -94,13 +94,19 @@
     </div>
   </div>
   <div class="popup popup_big-picture">
-    <div class="popup__content">
+    <div class="popup__content-big">
       <button aria-label="Закрыть" class="popup__close " type="button"></button>
-      <img src="" alt="">
-      <p></p>
+      <img src="./images/kalyazin-2.jpg" alt="Калязин" class="popup__image-big">
+      <p class="popup__title-big">Калязин</p>
     </div>
   </div>
-  
+      <template class="places__item">
+      <img src="" alt="" class="places__image">
+      <div class="places__info">
+        <h2 class="places__title"></h2>
+        <button aria-label="Нравится" class="places__like" type="button"></button>
+      </div>
+    </template>
   <script src="./scripts/index.js"></script>
  </body>
 </html>
