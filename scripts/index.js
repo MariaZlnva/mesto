@@ -40,13 +40,14 @@ const popupButtonAddCard = document.querySelector(".profile__add");
 const popupButtonCloseEdit = popupEditProfile.querySelector(".popup__close");
 const popupButtonCloseAdd = popupAddCard.querySelector(".popup__close");
 
-const formElement = popupEditProfile.querySelector(".popup__inputs");
+const formEditProfile = popupEditProfile.querySelector(".popup__inputs");
+const formAddCard = popupAddCard.querySelector(".popup__inputs");
 
 const profileName = document.querySelector(".profile__title");
 const profileInfo = document.querySelector(".profile__subtitle");
 
-const nameInput = formElement.querySelector(".popup__input_name");
-const infoInput = formElement.querySelector(".popup__input_info");
+const nameInput = formEditProfile.querySelector(".popup__input_name");
+const infoInput = formEditProfile.querySelector(".popup__input_info");
 
 // function open popup
 const popupOpen = function (evt) {
@@ -61,7 +62,7 @@ const popupClose = function (evt) {
   evt.classList.remove("popup_opened");
 }
 
-
+// функция сохранения введенных данных профиля
 function formSubmitHandler(evt) {
   evt.preventDefault();
   nameInput.value;
@@ -70,10 +71,21 @@ function formSubmitHandler(evt) {
   profileName.textContent = nameInput.value;
   profileInfo.textContent = infoInput.value;
 
-  popupClose();
+  popupClose(popupEditProfile);
   }
 
-formElement.addEventListener("submit", formSubmitHandler);
+formEditProfile.addEventListener("submit", formSubmitHandler);
+
+// обработчки отправки формы 
+function handleFormSubmit (evt) {
+  evt.preventDefault(); 
+
+
+  popupClose(popupAddCard);
+}
+
+formAddCard.addEventListener('submit', handleFormSubmit); 
+
 
 
 // обработчики событий открытия popups
