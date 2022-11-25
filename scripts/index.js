@@ -1,8 +1,17 @@
-const popupElement = document.querySelector(".popup");
-const popupOpenButtonElement = document.querySelector(".profile__edit");
-const popupCloseButtonElement = popupElement.querySelector(".popup__close");
+// popups elements
+const popupEditProfile = document.querySelector(".popup_edit-profile");
+const popupAddCard = document.querySelector(".popup_add-cards");
+const popunElementPicture = document.querySelector(".popup_big-picture");
 
-const formElement = popupElement.querySelector(".popup__inputs");
+// popups open buttons
+const popupButtonOpenEdit = document.querySelector(".profile__edit");
+const popupButtonAddCard = document.querySelector(".profile__add");
+
+// popup close buttons
+const popupButtonCloseEdit = popupEditProfile.querySelector(".popup__close");
+const popupButtonCloseAdd = popupAddCard.querySelector(".popup__close");
+
+const formElement = popupEditProfile.querySelector(".popup__inputs");
 
 const profileName = document.querySelector(".profile__title");
 const profileInfo = document.querySelector(".profile__subtitle");
@@ -10,19 +19,19 @@ const profileInfo = document.querySelector(".profile__subtitle");
 const nameInput = formElement.querySelector(".popup__input_name");
 const infoInput = formElement.querySelector(".popup__input_info");
 
-
+// function open popup
 const popupOpen = function (evt) {
-  
-  
-  popupElement.classList.add("popup_opened");
+  evt.classList.add("popup_opened");
 
   nameInput.value = profileName.textContent;
   infoInput.value = profileInfo.textContent;
 }
 
-const popupClose = function () {
-  popupElement.classList.remove("popup_opened");
+// закрываем попап
+const popupClose = function (evt) {
+  evt.classList.remove("popup_opened");
 }
+
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
@@ -37,5 +46,22 @@ function formSubmitHandler(evt) {
 
 formElement.addEventListener("submit", formSubmitHandler);
 
-popupOpenButtonElement.addEventListener("click", popupOpen);
-popupCloseButtonElement.addEventListener("click", popupClose);
+
+// обработчики событий открытия popups
+popupButtonOpenEdit.addEventListener("click", function() {
+  popupOpen(popupEditProfile)
+});
+popupButtonAddCard.addEventListener("click", function() {
+  popupOpen(popupAddCard)
+});
+
+// обработчики событий закрытия popups
+popupButtonCloseEdit.addEventListener("click", function() {
+  popupClose(popupEditProfile)
+});
+popupButtonCloseAdd.addEventListener("click", function() {
+  popupClose(popupAddCard)
+});
+
+
+
