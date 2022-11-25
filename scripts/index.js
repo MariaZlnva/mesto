@@ -24,6 +24,20 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ]; 
+// получаем эл-т и обращаемся к его св-ву content 
+const cardsTemplate = document.querySelector('#cards-template').content;
+const cardPlace = document.querySelector('.places');
+
+// клонируем содержимое template
+initialCards.forEach(function (card) {
+  const cardElement = cardsTemplate.cloneNode(true);
+
+  cardElement.querySelector('.places__title').textContent = card.name;
+  cardElement.querySelector('.places__image').src = card.link;  
+
+  cardPlace.append(cardElement);
+  
+});
 
 
 
