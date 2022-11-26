@@ -13,6 +13,6 @@
   background-image: url(../../../images/heart_hover.svg);
 }
 
-.places__like:active {
+/* .places__like:active {
   background-image: url(../../../images/heart-active.svg);
-}
+} */
