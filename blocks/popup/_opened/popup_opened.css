@@ -3,6 +3,6 @@
 
   opacity: 1;
   visibility: visible;
-  transition: visibility 0.5s linear, opacity .5s linear;
- 
+  /* transition: visibility 0.5s linear, opacity .5s linear; */
+  transition: visibility 0.5s, opacity .6s;
 }
