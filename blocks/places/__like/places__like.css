@@ -6,13 +6,11 @@
   background-size: contain;
   border: none;
   cursor: pointer;
-  background-color: transparent;
+  /* background-color: transparent; */
 }
 
 .places__like:hover {
   background-image: url(../../../images/heart_hover.svg);
 }
 
-/* .places__like:active {
-  background-image: url(../../../images/heart-active.svg);
-} */
+

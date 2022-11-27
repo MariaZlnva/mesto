@@ -1,8 +1,6 @@
 .places_like-active {
   background-image: url(../../../images/heart-active.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  border: none;
-  background-color: transparent;
+ 
   
+
 }
