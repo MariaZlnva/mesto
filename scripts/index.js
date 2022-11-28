@@ -69,11 +69,13 @@ function createElement (card){
     
   likeButton.addEventListener('click', handlerLikeButton);
   deleteButton.addEventListener('click', handlerDeleteButton);
-  // popupClickImage.addEventListener('click', handlerImageClick);
+  popupClickImage.addEventListener('click', handlerImageClick);
 
   return cardElement;
-  }
 
+  console.log(cardElement.content);
+  }
+  
 
 // функция обработчик like
 const handlerLikeButton = (evt) => {
@@ -85,9 +87,12 @@ const handlerDeleteButton = (evt) => {
   evt.target.closest(".places__item").remove();
 }
 
-// const handlerImageClick = function(evt){
-//   ev
-// }
+const handlerImageClick = (evt) => {
+  // в изображение попап подставляем src и alt на которые кликнули и открываем попап
+  popupClickImage.value = card.link.content;
+  console.log(popupClickImage);
+  popupOpen(popunPicture);
+}
 
 // функция которая получает в кач-ве аргумента card, создает карточку и помещает в верстку
 const renderCard = function(card){
