@@ -28,17 +28,18 @@ const initialCards = [
 // popups elements
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const popupAddCard = document.querySelector(".popup_add-cards");
-const popunPicture = document.querySelector(".popup_big-picture");
+const popupPicture = document.querySelector(".popup_big-picture");
 
 // popups open buttons
 const popupButtonOpenEdit = document.querySelector(".profile__edit");
 const popupButtonAddCard = document.querySelector(".profile__add");
-const popupClickImage = document.querySelector(".popup__image-big");
+const popupOpenBigPicture = document.querySelector(".places__image");
 
 // popup close buttons
 const popupButtonCloseEdit = popupEditProfile.querySelector(".popup__close");
 const popupButtonCloseAdd = popupAddCard.querySelector(".popup__close");
-const popupButtonCloseImage = popunPicture.querySelector(".popup__close");
+const popupButtonCloseImage = popupPicture.querySelector(".popup__close");
+
 
 
 const formEditProfile = popupEditProfile.querySelector(".popup__inputs");
@@ -52,12 +53,16 @@ const profileInfo = document.querySelector(".profile__subtitle");
 const nameInput = formEditProfile.querySelector(".popup__input_name");
 const infoInput = formEditProfile.querySelector(".popup__input_info");
 
+const imageBigPopup = popupPicture.querySelector(".popup__image-big");
+const titleBigPopup = popupPicture.querySelector(".popup__title-big");
+
 const cardPlace = document.querySelector(".places");
+const titleCardPlace = cardPlace.querySelector(".places__title");
 const cardTemplate = document.querySelector("#card-template").content.querySelector(".places__item");
 
 
 
-// функция создания элемента (у функции одно действие должно быть - здесь только создание)
+// функция создания элемента 
 function createElement (card){
   const cardElement = cardTemplate.cloneNode(true);
   const likeButton = cardElement.querySelector(".places__like");
@@ -69,14 +74,27 @@ function createElement (card){
     
   likeButton.addEventListener('click', handlerLikeButton);
   deleteButton.addEventListener('click', handlerDeleteButton);
-  popupClickImage.addEventListener('click', handlerImageClick);
+  cardImage.addEventListener('click', function() {
+    titleBigPopup.textContent = card.name;
+    imageBigPopup.src = card.link;
+    imageBigPopup.alt = card.name;
+    
+    popupOpen(popupPicture);
+    
+     });
 
   return cardElement;
-
-  console.log(cardElement.content);
   }
   
-
+  // const handlerClickPicture = (card) => {
+  //   titleBigPopup.textContent = card.name;
+  //   imageBigPopup.src = card.link;
+  //   imageBigPopup.alt = card.name;
+    
+  //   popupOpen(popupPicture);
+    
+  //    }
+    
 // функция обработчик like
 const handlerLikeButton = (evt) => {
   evt.target.classList.toggle("places_like-active");
@@ -87,12 +105,6 @@ const handlerDeleteButton = (evt) => {
   evt.target.closest(".places__item").remove();
 }
 
-const handlerImageClick = (evt) => {
-  // в изображение попап подставляем src и alt на которые кликнули и открываем попап
-  popupClickImage.value = card.link.content;
-  console.log(popupClickImage);
-  popupOpen(popunPicture);
-}
 
 // функция которая получает в кач-ве аргумента card, создает карточку и помещает в верстку
 const renderCard = function(card){
@@ -110,7 +122,7 @@ const popupOpen = function (evt) {
   evt.classList.add("popup_opened");
   nameInput.value = profileName.textContent;
   infoInput.value = profileInfo.textContent;
-}
+ }
 
 // закрываем попап
 const popupClose = function (evt) {
@@ -118,7 +130,7 @@ const popupClose = function (evt) {
 }
 
 // функция сохранения введенных данных профиля
-function formSubmitHandler(evt) {
+function handlerFormSubmitProfile(evt) {
   evt.preventDefault();
   nameInput.value;
   infoInput.value;
@@ -130,7 +142,7 @@ function formSubmitHandler(evt) {
 
 
 // функция обработчик события формы добавления карточки
-function handlerFormSubmit (evt) {
+function handlerFormSubmitAddCard (evt) {
   evt.preventDefault(); 
     const cardElement = {
       name: formInputName.value,
@@ -139,8 +151,6 @@ function handlerFormSubmit (evt) {
   renderCard(cardElement);
   popupClose(popupAddCard);
 }
-
-
 
 
 
@@ -159,11 +169,15 @@ popupButtonCloseAdd.addEventListener("click", function() {
   popupClose(popupAddCard)
 });
 
+popupButtonCloseImage.addEventListener("click", function() {
+  popupClose(popupPicture)
+});
 
 
 
-formAddCard.addEventListener('submit', handlerFormSubmit); 
 
-formEditProfile.addEventListener("submit", formSubmitHandler);
+formAddCard.addEventListener('submit', handlerFormSubmitAddCard); 
+
+formEditProfile.addEventListener("submit", handlerFormSubmitProfile);
 
 
