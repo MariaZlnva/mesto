@@ -40,8 +40,6 @@ const popupButtonCloseEdit = popupEditProfile.querySelector(".popup__close");
 const popupButtonCloseAdd = popupAddCard.querySelector(".popup__close");
 const popupButtonCloseImage = popupPicture.querySelector(".popup__close");
 
-
-
 const formEditProfile = popupEditProfile.querySelector(".popup__inputs");
 const formAddCard = popupAddCard.querySelector(".popup__inputs");
 const formInputName = formAddCard.querySelector(".popup__input_title");
@@ -86,15 +84,7 @@ function createElement (card){
   return cardElement;
   }
   
-  // const handlerClickPicture = (card) => {
-  //   titleBigPopup.textContent = card.name;
-  //   imageBigPopup.src = card.link;
-  //   imageBigPopup.alt = card.name;
-    
-  //   popupOpen(popupPicture);
-    
-  //    }
-    
+  
 // функция обработчик like
 const handlerLikeButton = (evt) => {
   evt.target.classList.toggle("places_like-active");
