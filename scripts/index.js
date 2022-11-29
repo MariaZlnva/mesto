@@ -1,30 +1,3 @@
-const initialCards = [
-    {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
-
 // popups elements
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const popupAddCard = document.querySelector(".popup_add-cards");
@@ -77,7 +50,7 @@ function createElement (card){
     imageBigPopup.src = card.link;
     imageBigPopup.alt = card.name;
     
-    popupOpen(popupPicture);
+    openPopup(popupPicture);
     
      });
 
@@ -107,26 +80,28 @@ initialCards.forEach(function(card){
   renderCard(card);
   })
 
-// function open popup
-const popupOpen = function (evt) {
-  evt.classList.add("popup_opened");
-  nameInput.value = profileName.textContent;
-  infoInput.value = profileInfo.textContent;
- }
+  const openProfilePopup = function (evt) {
+    evt.classList.add("popup_opened");
+    nameInput.value = profileName.textContent;
+    infoInput.value = profileInfo.textContent;
+   }
 
-// закрываем попап
-const popupClose = function (evt) {
+
+const openPopup = function (evt) {
+  evt.classList.add("popup_opened");
+   }
+
+
+const closePopup = function (evt) {
   evt.classList.remove("popup_opened");
 }
 
 // функция сохранения введенных данных профиля
 function handlerFormSubmitProfile(evt) {
   evt.preventDefault();
-  nameInput.value;
-  infoInput.value;
   profileName.textContent = nameInput.value;
   profileInfo.textContent = infoInput.value;
-  popupClose(popupEditProfile);
+  closePopup(popupEditProfile);
   }
 
 
@@ -139,28 +114,28 @@ function handlerFormSubmitAddCard (evt) {
       link: formInputLink.value,
     }
   renderCard(cardElement);
-  popupClose(popupAddCard);
+  closePopup(popupAddCard);
 }
 
 
 
 // функции слушатели событий открытия/закрытия попапов
 popupButtonOpenEdit.addEventListener("click", function() {
-  popupOpen(popupEditProfile)
+  openProfilePopup(popupEditProfile)
 });
 popupButtonAddCard.addEventListener("click", function() {
-  popupOpen(popupAddCard)
+  openPopup(popupAddCard)
 });
 
 popupButtonCloseEdit.addEventListener("click", function() {
-  popupClose(popupEditProfile)
+  closePopup(popupEditProfile)
 });
 popupButtonCloseAdd.addEventListener("click", function() {
-  popupClose(popupAddCard)
+  closePopup(popupAddCard)
 });
 
 popupButtonCloseImage.addEventListener("click", function() {
-  popupClose(popupPicture)
+  closePopup(popupPicture)
 });
 
 
