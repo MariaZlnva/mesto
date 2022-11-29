@@ -105,8 +105,11 @@ function handlerFormSubmitAddCard (evt) {
       name: formInputName.value,
       link: formInputLink.value,
     }
+    
   renderCard(cardElement);
   closePopup(popupAddCard);
+  formAddCard.reset();
+ 
 }
 
 popupEditProfileOpen.addEventListener("click", function() {
