@@ -13,6 +13,8 @@
 @media screen and (max-width: 1100px) {
   .profile__add {
     width: 100px;
+    align-self: flex-end;
+    margin-bottom: 29px;
   }
 }
 @media screen and (max-width: 440px) {
