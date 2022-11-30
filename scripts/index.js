@@ -24,7 +24,6 @@ const imagePopupPicture = popupPicture.querySelector(".popup__image-big");
 const titlePopupPicture = popupPicture.querySelector(".popup__title-big");
 
 const cardPlace = document.querySelector(".places");
-// const titleCardPlace = cardPlace.querySelector(".places__title");
 const cardTemplate = document.querySelector("#card-template").content.querySelector(".places__item");
 
 
@@ -74,20 +73,20 @@ initialCards.forEach(function(card){
   renderCard(card);
   })
   
-const openProfilePopup = function (evt) {
-  evt.classList.add("popup_opened");
+const openProfilePopup = function () {
+  openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   infoInput.value = profileInfo.textContent;
  }
 
 
-const openPopup = function (evt) {
-  evt.classList.add("popup_opened");
+const openPopup = function (popup) {
+  popup.classList.add("popup_opened");
    }
 
 
-const closePopup = function (evt) {
-  evt.classList.remove("popup_opened");
+const closePopup = function (popup) {
+  popup.classList.remove("popup_opened");
 }
 
 
@@ -113,7 +112,7 @@ function handlerFormSubmitAddCard (evt) {
 }
 
 popupEditProfileOpen.addEventListener("click", function() {
-  openProfilePopup(popupEditProfile)
+  openProfilePopup()
 });
 
 popupAddCardOpen.addEventListener("click", function() {
