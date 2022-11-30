@@ -10,15 +10,9 @@
   opacity: 0.7;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 760px) {
   .profile__add {
-    width: 100px;
-    align-self: flex-end;
-    margin-bottom: 29px;
+     width: 100%;
   }
 }
-@media screen and (max-width: 440px) {
-  .profile__add {
-    width: 100%;
-  }
-}
+
