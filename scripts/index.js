@@ -74,9 +74,6 @@ initialCards.forEach(function(card){
   })
 
 
-
-  
-
 const openProfilePopup = function () {
   openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
@@ -86,6 +83,7 @@ const openProfilePopup = function () {
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   popup.addEventListener("click", closePopupClickOverlay);
+  document.addEventListener("keydown", closePopupClickEsc);
 }
 
 const closePopup = function (popup) {
@@ -96,6 +94,12 @@ const closePopupClickOverlay = function (evt) {
   if (evt.target.classList.contains("popup_opened")){
   closePopup(evt.target);
   }
+}
+
+const closePopupClickEsc = function (evt) {
+   if (evt.key === "Escape"){
+    closePopup(document.querySelector(".popup_opened"));
+   }
 }
 
 function handlerFormSubmitProfile(evt) {
