@@ -72,23 +72,31 @@ const renderCard = function(card){
 initialCards.forEach(function(card){
   renderCard(card);
   })
+
+
+
   
+
 const openProfilePopup = function () {
   openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   infoInput.value = profileInfo.textContent;
  }
 
-
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
-   }
-
+  popup.addEventListener("click", closePopupClickOverlay);
+}
 
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
 }
 
+const closePopupClickOverlay = function (evt) {
+  if (evt.target.classList.contains("popup_opened")){
+  closePopup(evt.target);
+  }
+}
 
 function handlerFormSubmitProfile(evt) {
   evt.preventDefault();
@@ -130,6 +138,7 @@ popupAddCardClose.addEventListener("click", function() {
 popupPictureClose.addEventListener("click", function() {
   closePopup(popupPicture)
 });
+
 
 
 formAddCard.addEventListener('submit', handlerFormSubmitAddCard); 
