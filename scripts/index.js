@@ -9,8 +9,8 @@ const popupEditProfileClose = popupEditProfile.querySelector(".popup__close");
 const popupAddCardClose = popupAddCard.querySelector(".popup__close");
 const popupPictureClose = popupPicture.querySelector(".popup__close");
 
-const formEditProfile = popupEditProfile.querySelector(".popup__inputs");
-const formAddCard = popupAddCard.querySelector(".popup__inputs");
+const formEditProfile = popupEditProfile.querySelector(".popup__form");
+const formAddCard = popupAddCard.querySelector(".popup__form");
 const formInputName = formAddCard.querySelector(".popup__input_title");
 const formInputLink = formAddCard.querySelector(".popup__input_link");
 

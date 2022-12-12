@@ -34,9 +34,11 @@
     <div class="popup__content">
       <button aria-label="Закрыть" class="popup__close" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__inputs" name="aboutUser">
-        <input class="popup__input popup__input_name" type="text" name="aboutUser" value="" placeholder="Имя">
-        <input class="popup__input popup__input_info" type="text" name="aboutUser" value="" placeholder="О себе">
+      <form class="popup__form" novalidate name="aboutUser">
+        <input id="nameUser" class="popup__input popup__input_name" type="text" name="aboutUser" value="" placeholder="Имя" minlength="2" maxlength="40" required>
+        <span id="nameUser-error" class="error"></span>
+        <input id="aboutUser" class="popup__input popup__input_info" type="text" name="aboutUser" value="" placeholder="О себе" minlength="2" maxlength="200" required>
+        <span id="aboutUser-error" class="error"></span>
         <button class="popup__button" type="submit">Сохранить</button>
       </form>
     </div>
@@ -45,9 +47,11 @@
     <div class="popup__content">
       <button aria-label="Закрыть" class="popup__close" type="button"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup__inputs" name="aboutCard">
-        <input class="popup__input popup__input_title" placeholder="Название" type="text" name="aboutCard" value="">
-        <input class="popup__input popup__input_link" placeholder="Ссылка на картинку" type="url" name="aboutCard" value="">
+      <form class="popup__form" novalidate name="aboutCard">
+        <input id="nameCard" class="popup__input popup__input_title" placeholder="Название" type="text" name="aboutCard" value="" minlength="2" maxlength="30" required>
+        <span id="nameCard-error" class="error"></span>
+        <input id="urlCard"class="popup__input popup__input_link" placeholder="Ссылка на картинку" type="url" name="aboutCard" value="" required>
+        <span id="urlCard-error" class="error"></span>
         <button class="popup__button" type="submit">Создать</button>
       </form>
     </div>
