@@ -4,13 +4,13 @@
 const inputs = Array.from(document.querySelectorAll(".popup__input"));
 
 function showErrorInput(inputSelector, error){
-  inputSelector.classList.add("popup__input_type-error");
+  inputSelector.classList.add("popup__input_type_error");
   error.classList.add("popup__error_visible");
   error.textContent = inputSelector.validationMessage;
 }
 
 function hideErrorInput(inputSelector, error) {
-  inputSelector.classList.remove("popup__input_type-error");
+  inputSelector.classList.remove("popup__input_type_error");
   error.classList.remove("popup__error_visible");
   error.textContent = "";
 }
