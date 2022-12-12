@@ -1,6 +1,3 @@
-
-
-
 const inputs = Array.from(document.querySelectorAll(".popup__input"));
 
 function showErrorInput(inputSelector, error){
@@ -15,17 +12,22 @@ function hideErrorInput(inputSelector, error) {
   error.textContent = "";
 }
 
+const isValid = (inputSelector, error) =>{
+  if (inputSelector.validity.valid){
+    hideErrorInput(inputSelector, error);
+  } else {
+    showErrorInput(inputSelector, error)
+  }
+
+}
+
 inputs.forEach(inputSelector => {
   inputSelector.addEventListener("input", () => {
     const error = document.querySelector(`#${inputSelector.id}-error`);
-    
-    if (inputSelector.validity.valid){
-      hideErrorInput(inputSelector, error);
-    } else {
-      showErrorInput(inputSelector, error)
-    }
-
-    
+// проверяет поля на валидность и показ/скрыв.ошибку
+    isValid(inputSelector, error);
+    // кнопка актив/неактив
+    // const hasInvalid
 
   })
 })
