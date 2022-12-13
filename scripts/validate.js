@@ -27,7 +27,7 @@ const isValidForm = (inputs) => {
   )};
 const toggleButtonState = (inputs, buttonSubmit, config) => {
      if (isValidForm(inputs)) {
-    console.log("кнопка должна бытьактивная")
+    console.log("кнопка должна быть активная")
     buttonSubmit.classList.remove(config.inactiveButtonClass);
     buttonSubmit.removeAttribute("disabled");
   } else {

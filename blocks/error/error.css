@@ -3,4 +3,6 @@
   font-weight: 400;
   line-height: 1.25;
   color: red;
+  display: block;
+  min-height: 24px;
 }
