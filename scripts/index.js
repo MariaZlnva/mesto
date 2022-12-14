@@ -29,17 +29,17 @@ const titlePopupPicture = popupPicture.querySelector(".popup__title-big");
 const cardPlace = document.querySelector(".places");
 const cardTemplate = document
   .querySelector("#card-template")
-  .content.querySelector(".places__item");
-
+  .content.querySelector(".card");
+  
 // функция создания элемента
 function createElement(card) {
   const cardElement = cardTemplate.cloneNode(true);
 
-  const likeButton = cardElement.querySelector(".places__like");
-  const deleteButton = cardElement.querySelector(".places__delete");
+  const likeButton = cardElement.querySelector(".card__like");
+  const deleteButton = cardElement.querySelector(".card__delete");
 
-  const nameCard = cardElement.querySelector(".places__title");
-  const imageCard = cardElement.querySelector(".places__image");
+  const nameCard = cardElement.querySelector(".card__title");
+  const imageCard = cardElement.querySelector(".card__image");
   nameCard.textContent = card.name;
   imageCard.src = card.link;
 
@@ -58,11 +58,11 @@ function createElement(card) {
 }
 
 const handlerLikeButton = (evt) => {
-  evt.target.classList.toggle("places_like-active");
+  evt.target.classList.toggle("card_like-active");
 };
 
 const handlerDeleteButton = (evt) => {
-  evt.target.closest(".places__item").remove();
+  evt.target.closest(".card").remove();
 };
 
 const renderCard = function (card) {

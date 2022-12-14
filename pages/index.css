@@ -22,13 +22,15 @@
 @import url(../blocks/profile/__add/profile__add.css);
 
 @import url(../blocks/places/places.css);
-@import url(../blocks/places/__item/places__item.css);
-@import url(../blocks/places/__image/places__image.css);
-@import url(../blocks/places/__info/places__info.css);
-@import url(../blocks/places/__title/places__title.css);
-@import url(../blocks/places/__like/places__like.css);
-@import url(../blocks/places/_like-active/places_like-active.css);
-@import url(../blocks/places/__delete/places__delete.css);
+
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__delete/card__delete.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__info/card__info.css);
+@import url(../blocks/card/__title/card__title.css);
+@import url(../blocks/card/__like/card__like.css);
+@import url(../blocks/card/_like-active/card_like-active.css);
+
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
