@@ -9,7 +9,7 @@
   flex-direction: column;
   border-radius: 10px;
   padding: 34px 36px 37px;
-
+  box-sizing: border-box;
   position: absolute;
   top: 50%;
   left: 50%;
