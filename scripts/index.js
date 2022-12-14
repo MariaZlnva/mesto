@@ -3,7 +3,7 @@ const popupAddCard = document.querySelector(".popup_add-cards");
 const popupPicture = document.querySelector(".popup_big-picture");
 
 const buttonSubmitEditProfile = popupEditProfile.querySelector(".popup__button");
-console.log(buttonSubmitEditProfile)
+console.log(hideError)
 
 const popupEditProfileOpen = document.querySelector(".profile__edit");
 const popupAddCardOpen = document.querySelector(".profile__add");
@@ -77,12 +77,19 @@ initialCards.forEach(function(card){
   })
 
 
-
-
 const enableButtonSubmit = function (button){
   button.classList.remove("popup__button_disabled");
   button.disabled = false;
 } 
+
+const clearErrorInput = function (popup) {
+  const inputsPopup = popup.querySelectorAll(".popup__input");
+  inputsPopup.forEach((inputPopup) => {
+    errorInput = popup.querySelector(`#${inputPopup.id}-error`);
+    inputPopup.classList.remove("popup__input_type_error");
+    errorInput.textContent = "";
+  })
+};
 
 const openProfilePopup = function () {
   openPopup(popupEditProfile);
@@ -95,7 +102,7 @@ const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   popup.addEventListener("click", closePopupClickOverlay);
   document.addEventListener("keydown", closePopupClickEsc);
-
+  clearErrorInput(popup);
 }
 
 const closePopup = function (popup) {
@@ -103,6 +110,8 @@ const closePopup = function (popup) {
   document.removeEventListener("keydown", closePopupClickEsc);
 
 }
+
+
 
 const closePopupClickOverlay = function (evt) {
   if (evt.target.classList.contains("popup_opened")){
@@ -121,7 +130,7 @@ function handlerFormSubmitProfile(evt) {
   profileName.textContent = nameInput.value;
   profileInfo.textContent = infoInput.value;
   closePopup(popupEditProfile);
-  }
+}
 
 
 function handlerFormSubmitAddCard (evt) {
@@ -130,12 +139,9 @@ function handlerFormSubmitAddCard (evt) {
       name: formInputName.value,
       link: formInputLink.value,
     }
-    
   renderCard(cardElement);
   closePopup(popupAddCard);
-  formAddCard.reset();
-  
- 
+  formAddCard.reset(); 
 }
 
 popupEditProfileOpen.addEventListener("click", function() {
