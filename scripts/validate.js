@@ -27,11 +27,9 @@ const isValidForm = (inputs) => {
   )};
 const toggleButtonState = (inputs, buttonSubmit, config) => {
      if (isValidForm(inputs)) {
-    console.log("кнопка должна быть активная")
     buttonSubmit.classList.remove(config.inactiveButtonClass);
     buttonSubmit.removeAttribute("disabled");
   } else {
-    console.log("кнопка должна быть неактивная")
     buttonSubmit.classList.add(config.inactiveButtonClass);
     buttonSubmit.disabled  = true;
   }
@@ -43,6 +41,12 @@ const setEventListeners = (formSelector, config) => {
   const buttonSubmit = formSelector.querySelector(config.submitButtonSelector);
  
   toggleButtonState(inputs, buttonSubmit, config);
+
+  formSelector.addEventListener('reset', function () {
+    setTimeout(() => {
+      toggleButtonState(inputs, buttonSubmit, config);
+    }, 0);
+  });
 
   inputs.forEach((inputSelector) => {
         inputSelector.addEventListener("input", () => {

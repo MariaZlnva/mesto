@@ -80,15 +80,17 @@ const openProfilePopup = function () {
   infoInput.value = profileInfo.textContent;
   
  }
-
+ 
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   popup.addEventListener("click", closePopupClickOverlay);
   document.addEventListener("keydown", closePopupClickEsc);
+
 }
 
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
+
 }
 
 const closePopupClickOverlay = function (evt) {
@@ -130,6 +132,7 @@ popupEditProfileOpen.addEventListener("click", function() {
 
 popupAddCardOpen.addEventListener("click", function() {
   openPopup(popupAddCard)
+  
 });
 
 popupEditProfileClose.addEventListener("click", function() {
