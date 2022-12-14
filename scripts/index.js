@@ -2,6 +2,9 @@ const popupEditProfile = document.querySelector(".popup_edit-profile");
 const popupAddCard = document.querySelector(".popup_add-cards");
 const popupPicture = document.querySelector(".popup_big-picture");
 
+const buttonSubmitEditProfile = popupEditProfile.querySelector(".popup__button");
+console.log(buttonSubmitEditProfile)
+
 const popupEditProfileOpen = document.querySelector(".profile__edit");
 const popupAddCardOpen = document.querySelector(".profile__add");
 
@@ -74,11 +77,18 @@ initialCards.forEach(function(card){
   })
 
 
+
+
+const enableButtonSubmit = function (button){
+  button.classList.remove("popup__button_disabled");
+  button.disabled = false;
+} 
+
 const openProfilePopup = function () {
   openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   infoInput.value = profileInfo.textContent;
-  
+  enableButtonSubmit(buttonSubmitEditProfile);
  }
  
 const openPopup = function (popup) {
@@ -90,6 +100,7 @@ const openPopup = function (popup) {
 
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closePopupClickEsc);
 
 }
 
@@ -123,6 +134,7 @@ function handlerFormSubmitAddCard (evt) {
   renderCard(cardElement);
   closePopup(popupAddCard);
   formAddCard.reset();
+  
  
 }
 

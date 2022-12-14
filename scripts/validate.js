@@ -39,7 +39,7 @@ const setEventListeners = (formSelector, config) => {
   
   const inputs = Array.from(formSelector.querySelectorAll(config.inputSelector));
   const buttonSubmit = formSelector.querySelector(config.submitButtonSelector);
- 
+  
   toggleButtonState(inputs, buttonSubmit, config);
 
   formSelector.addEventListener('reset', function () {
@@ -60,7 +60,7 @@ const setEventListeners = (formSelector, config) => {
 
 const enableValidation = (config) => {
   const forms = Array.from(document.querySelectorAll(config.formSelector));
-    
+  
   forms.forEach((formSelector) => {
     formSelector.addEventListener("submit", (evt) => {
           evt.preventDefault();
