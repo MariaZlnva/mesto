@@ -1,4 +1,3 @@
-
 const hideError = (inputSelector, error, config) => {
   inputSelector.classList.remove(config.inputErrorClass);
   error.classList.remove(config.errorClass);
@@ -21,55 +20,53 @@ const checkValidityInput = (inputSelector, config) => {
 };
 
 const isValidForm = (inputs) => {
-  return inputs.every(inputSelector => {
-  return inputSelector.validity.valid 
-}
-  )};
+  return inputs.every((inputSelector) => {
+    return inputSelector.validity.valid;
+  });
+};
 const toggleButtonState = (inputs, buttonSubmit, config) => {
-     if (isValidForm(inputs)) {
+  if (isValidForm(inputs)) {
     buttonSubmit.classList.remove(config.inactiveButtonClass);
     buttonSubmit.removeAttribute("disabled");
   } else {
     buttonSubmit.classList.add(config.inactiveButtonClass);
-    buttonSubmit.disabled  = true;
+    buttonSubmit.disabled = true;
   }
-}
+};
 
 const setEventListeners = (formSelector, config) => {
-  
-  const inputs = Array.from(formSelector.querySelectorAll(config.inputSelector));
+  const inputs = Array.from(
+    formSelector.querySelectorAll(config.inputSelector)
+  );
   const buttonSubmit = formSelector.querySelector(config.submitButtonSelector);
-  
+
   toggleButtonState(inputs, buttonSubmit, config);
 
-  formSelector.addEventListener('reset', function () {
+  formSelector.addEventListener("reset", function () {
     setTimeout(() => {
       toggleButtonState(inputs, buttonSubmit, config);
     }, 0);
   });
 
   inputs.forEach((inputSelector) => {
-        inputSelector.addEventListener("input", () => {
-          
-          checkValidityInput(inputSelector, config);
-          toggleButtonState(inputs, buttonSubmit, config);
-          
-        });
+    inputSelector.addEventListener("input", () => {
+      checkValidityInput(inputSelector, config);
+      toggleButtonState(inputs, buttonSubmit, config);
+    });
   });
-}
+};
 
 const enableValidation = (config) => {
   const forms = Array.from(document.querySelectorAll(config.formSelector));
-  
+
   forms.forEach((formSelector) => {
     formSelector.addEventListener("submit", (evt) => {
-          evt.preventDefault();
-        });
-        
+      evt.preventDefault();
+    });
+
     setEventListeners(formSelector, config);
-    
   });
-}
+};
 enableValidation({
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
@@ -78,6 +75,3 @@ enableValidation({
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible",
 });
-
-
-
