@@ -80,7 +80,7 @@ initialCards.forEach(function(card){
 const enableButtonSubmit = function (button){
   button.classList.remove("popup__button_disabled");
   button.disabled = false;
-} 
+}
 
 const clearErrorInput = function (popup) {
   const inputsPopup = popup.querySelectorAll(".popup__input");
@@ -88,8 +88,9 @@ const clearErrorInput = function (popup) {
     errorInput = popup.querySelector(`#${inputPopup.id}-error`);
     inputPopup.classList.remove("popup__input_type_error");
     errorInput.textContent = "";
-  })
-};
+    inputPopup.value = "";
+  });
+}
 
 const openProfilePopup = function () {
   openPopup(popupEditProfile);
@@ -108,7 +109,7 @@ const openPopup = function (popup) {
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupClickEsc);
-
+ 
 }
 
 
