@@ -78,6 +78,7 @@ const openProfilePopup = function () {
   openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   infoInput.value = profileInfo.textContent;
+  
  }
 
 const openPopup = function (popup) {
