@@ -24,10 +24,12 @@ const isValidForm = (inputs) => {
     return inputSelector.validity.valid;
   });
 };
+
+
 const toggleButtonState = (inputs, buttonSubmit, config) => {
   if (isValidForm(inputs)) {
     buttonSubmit.classList.remove(config.inactiveButtonClass);
-    buttonSubmit.removeAttribute("disabled");
+    buttonSubmit.disabled = false;
   } else {
     buttonSubmit.classList.add(config.inactiveButtonClass);
     buttonSubmit.disabled = true;

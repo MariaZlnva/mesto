@@ -75,10 +75,7 @@ initialCards.forEach(function (card) {
   renderCard(card);
 });
 
-const enableButtonSubmit = function (button) {
-  button.classList.remove("popup__button_disabled");
-  button.disabled = false;
-};
+
 
 const clearErrorInput = function (popup) {
   const inputsPopup = popup.querySelectorAll(".popup__input");
@@ -91,17 +88,23 @@ const clearErrorInput = function (popup) {
 };
 
 const openProfilePopup = function () {
+  clearErrorInput(popupEditProfile);
   openPopup(popupEditProfile);
+  formEditProfile.reset();
   nameInput.value = profileName.textContent;
   infoInput.value = profileInfo.textContent;
-  enableButtonSubmit(buttonSubmitEditProfile);
+  
 };
+
+const openAddCardPopup = function () {
+  clearErrorInput(popupAddCard);
+  openPopup(popupAddCard);
+}
 
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   popup.addEventListener("click", closePopupClickOverlay);
   document.addEventListener("keydown", closePopupClickEsc);
-  clearErrorInput(popup);
 };
 
 const closePopup = function (popup) {
@@ -144,7 +147,7 @@ popupEditProfileOpen.addEventListener("click", function () {
 });
 
 popupAddCardOpen.addEventListener("click", function () {
-  openPopup(popupAddCard);
+  openAddCardPopup();
 });
 
 popupEditProfileClose.addEventListener("click", function () {
