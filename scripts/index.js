@@ -1,12 +1,10 @@
+import { initialCards, config } from "./constants.js";
 import Card from "./Card.js";
-// import FormValidator from "./FormValidator";
+import FormValidator from "./FormValidator.js";
 
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const popupAddCard = document.querySelector(".popup_add-cards");
 const popupPicture = document.querySelector(".popup_big-picture");
-
-// const buttonSubmitEditProfile =
-//   popupEditProfile.querySelector(".popup__button");
 
 const popupEditProfileOpen = document.querySelector(".profile__edit");
 const popupAddCardOpen = document.querySelector(".profile__add");
@@ -30,52 +28,16 @@ const imagePopupPicture = popupPicture.querySelector(".popup__image-big");
 const titlePopupPicture = popupPicture.querySelector(".popup__title-big");
 
 const cardPlace = document.querySelector(".places");
-// const cardTemplate = document
-//   .querySelector(".card-template");
-//   // .content.querySelector(".card");
 
-  // функция создания элемента
-// function createElement(card) {
-//   const cardElement = cardTemplate.cloneNode(true);
+// экземпляры класса валидации для форм
+const validFormEditProfile = new FormValidator(config, formEditProfile);
+const validFormAddCard = new FormValidator(config, formAddCard);
 
-//   const likeButton = cardElement.querySelector(".card__like");
-//   const deleteButton = cardElement.querySelector(".card__delete");
-
-//   const nameCard = cardElement.querySelector(".card__title");
-//   const imageCard = cardElement.querySelector(".card__image");
-//   nameCard.textContent = card.name;
-//   imageCard.src = card.link;
-
-//   likeButton.addEventListener("click", handlerLikeButton);
-//   deleteButton.addEventListener("click", handlerDeleteButton);
-
-//   imageCard.addEventListener("click", function () {
-//     titlePopupPicture.textContent = card.name;
-//     imagePopupPicture.src = card.link;
-//     imagePopupPicture.alt = card.name;
-
-//     openPopup(popupPicture);
-//   });
-
-//   return cardElement;
-// }
-
-// const handlerLikeButton = (evt) => {
-//   evt.target.classList.toggle("card_like-active");
-// };
-
-// const handlerDeleteButton = (evt) => {
-//   evt.target.closest(".card").remove();
-// };
-
-// const renderCard = function (card) {
-//   const element = createElement(card);
-//   cardPlace.prepend(element);
-// };
-
-// перебираем массив, в кач-ве аргум функция, которая вызывается на каждый элемент массива
+validFormEditProfile.enableValidation();
+validFormAddCard.enableValidation();
 
 
+// очищаем поля от ошибок
 const clearErrorInput = function (popup) {
   const inputsPopup = popup.querySelectorAll(".popup__input");
   inputsPopup.forEach((inputPopup) => {
@@ -92,13 +54,12 @@ const openProfilePopup = function () {
   formEditProfile.reset();
   nameInput.value = profileName.textContent;
   infoInput.value = profileInfo.textContent;
-  
 };
 
 const openAddCardPopup = function () {
   clearErrorInput(popupAddCard);
   openPopup(popupAddCard);
-}
+};
 
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
@@ -129,7 +90,7 @@ const handlerImageCardClick = (name, link) => {
   imagePopupPicture.alt = name;
 
   openPopup(popupPicture);
-}
+};
 
 function handlerFormSubmitProfile(evt) {
   evt.preventDefault();
@@ -150,15 +111,14 @@ function handlerFormSubmitAddCard(evt) {
 }
 
 const renderCard = (item) => {
-  const card = new Card (item, ".card-template", handlerImageCardClick);
-  const  elementCard = card.generateCard(item);
+  const card = new Card(item, ".card-template", handlerImageCardClick);
+  const elementCard = card.generateCard(item);
   cardPlace.prepend(elementCard);
-}
+};
 
-initialCards.forEach(item => {
+initialCards.forEach((item) => {
   renderCard(item);
 });
-
 
 popupEditProfileOpen.addEventListener("click", function () {
   openProfilePopup();
@@ -183,14 +143,3 @@ popupPictureClose.addEventListener("click", function () {
 formAddCard.addEventListener("submit", handlerFormSubmitAddCard);
 
 formEditProfile.addEventListener("submit", handlerFormSubmitProfile);
-
-
-
-// const formValidation = new FormValidator({
-//   formSelector: ".popup__form",
-//   inputSelector: ".popup__input",
-//   submitButtonSelector: ".popup__button",
-//   inactiveButtonClass: "popup__button_disabled",
-//   inputErrorClass: "popup__input_type_error",
-//   errorClass: "popup__error_visible",
-// }, formSelector) 
