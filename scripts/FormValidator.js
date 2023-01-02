@@ -18,23 +18,26 @@ export default class FormValidator {
 
   //метод проверяет поля и добавляет/удаляет текст и стиль ошибки
   _checkValidityInput(inputSelector) {
-    const error = this._formSelector.querySelector(
-      `#${inputSelector.id}-error`
-    );
     if (inputSelector.validity.valid) {
-      this._hideError(inputSelector, error);
+      this._hideError(inputSelector);
     } else {
-      this._showError(inputSelector, error);
+      this._showError(inputSelector);
     }
   }
 
-  _hideError(inputSelector, error) {
+  _hideError(inputSelector) {
+    const error = this._formSelector.querySelector(
+      `#${inputSelector.id}-error`
+    );
     inputSelector.classList.remove(this._inputErrorClass);
     error.classList.remove(this._errorClass);
     error.textContent = "";
   }
 
-  _showError(inputSelector, error) {
+  _showError(inputSelector) {
+    const error = this._formSelector.querySelector(
+      `#${inputSelector.id}-error`
+    );
     inputSelector.classList.add(this._inputErrorClass);
     error.classList.add(this._errorClass);
     error.textContent = inputSelector.validationMessage;
@@ -56,6 +59,14 @@ export default class FormValidator {
       this._buttonSubmit.classList.add(this._inactiveButtonClass);
       this._buttonSubmit.disabled = true;
     }
+  }
+
+  // метод для очистки ошибок и управления кнопкой
+  resetValidation() {
+    this._toggleButtonState();
+    this._inputs.forEach((inputSelector) => {
+      this._hideError(inputSelector);
+    });
   }
 
   // метод устанавливает слушателей ввода данных, резета
