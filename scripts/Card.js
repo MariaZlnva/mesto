@@ -25,40 +25,40 @@ export default class Card {
     // доб.данные элемента
     this._element.querySelector(".card__title").textContent = this._name;
     this._element.querySelector(".card__image").src = this._link;
-
+    this._element.querySelector(".card__image").alt = this._name;
+    
     this._setEventListenersCard();
     // возвращаем эл-т
     return this._element;
+    
   }
 
   // метод устанавливающий слушатели событий(лайка, корзины, открытия бол.картинки)
   _setEventListenersCard() {
-    this._element.querySelector(".card__like").addEventListener("click", () => {
+    this._cardLikeButton = this._element.querySelector(".card__like");
+    this._cardDeleteButton = this._element.querySelector(".card__delete");
+    this._cardImage = this._element.querySelector(".card__image");
+
+    this._cardLikeButton.addEventListener("click", () => {
       this._handlerLikeButton();
     });
 
-    this._element
-      .querySelector(".card__delete")
-      .addEventListener("click", () => {
-        this._handlerDeleteButton();
-      });
+    this._cardDeleteButton.addEventListener("click", () => {
+      this._handlerDeleteButton();
+    });
 
-    this._element
-      .querySelector(".card__image")
-      .addEventListener("click", () => {
-        this._handlerImageCardClick(this._name, this._link);
-      });
+    this._cardImage.addEventListener("click", () => {
+      this._handlerImageCardClick(this._name, this._link);
+    });
   }
 
   // метод для обраб.like
   _handlerLikeButton() {
-    this._element
-      .querySelector(".card__like")
-      .classList.toggle("card_like-active");
+    this._cardLikeButton.classList.toggle("card_like-active");
   }
 
   // метод для обраб.delete
   _handlerDeleteButton() {
-    this._element.querySelector(".card__delete").closest(".card").remove();
+    this._cardDeleteButton.closest(".card").remove();
   }
 }
