@@ -54,24 +54,29 @@ const openAddCardPopup = function () {
 
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
+  popup.addEventListener("click", closePopupClickOverlay); 
+  document.addEventListener("keydown", closePopupClickEsc); 
 };
 
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closePopupClickEsc);
+  popup.removeEventListener("click", closePopupClickOverlay); 
 };
 
 
-// слушатели нажатия кнопки по оверлей и крестику
-popups.forEach((popup) => {
-  popup.addEventListener("mousedown", (evt) => {
-    if (evt.target.classList.contains("popup_opened")) {
-      closePopup(popup);
-    }
-    if (evt.target.classList.contains("popup__close")) {
-      closePopup(popup);
-    }
-  });
-});
+const closePopupClickOverlay = function (evt) {
+  if (evt.target.classList.contains("popup_opened")) {
+    closePopup(evt.target);
+  }
+};
+
+const closePopupClickEsc = function (evt) {
+  if (evt.key === "Escape") {
+    closePopup(document.querySelector(".popup_opened"));
+  }
+};
+
 
 const handlerImageCardClick = (name, link) => {
   titlePopupPicture.textContent = name;
@@ -115,8 +120,6 @@ function createCard(item) {
   const elementCard = card.generateCard(item);
   return elementCard;
 }
-
-
 
 popupEditProfileOpen.addEventListener("click", function () {
   openProfilePopup();
