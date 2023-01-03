@@ -23,9 +23,10 @@ export default class Card {
     this._element = this._getTemplate();
 
     // доб.данные элемента
+    this._cardImage = this._element.querySelector(".card__image");
     this._element.querySelector(".card__title").textContent = this._name;
-    this._element.querySelector(".card__image").src = this._link;
-    this._element.querySelector(".card__image").alt = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
     
     this._setEventListenersCard();
     // возвращаем эл-т
@@ -37,7 +38,7 @@ export default class Card {
   _setEventListenersCard() {
     this._cardLikeButton = this._element.querySelector(".card__like");
     this._cardDeleteButton = this._element.querySelector(".card__delete");
-    this._cardImage = this._element.querySelector(".card__image");
+    
 
     this._cardLikeButton.addEventListener("click", () => {
       this._handlerLikeButton();
