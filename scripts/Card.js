@@ -24,6 +24,7 @@ export default class Card {
 
     // доб.данные элемента
     this._cardImage = this._element.querySelector(".card__image");
+    
     this._element.querySelector(".card__title").textContent = this._name;
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;

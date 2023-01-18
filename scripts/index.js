@@ -1,6 +1,11 @@
 import { initialCards, config } from "./constants.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
+import Section from "./Section.js";
+// import PopupWithForm from "./PopupWithImage.js";
+// import PopupWithImage from "./PopupWithImage.js";
+ 
+
 
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const popupAddCard = document.querySelector(".popup_add-cards");
@@ -31,12 +36,20 @@ const titlePopupPicture = popupPicture.querySelector(".popup__title-big");
 
 const cardPlace = document.querySelector(".places");
 
+
+//экзампляры класса Попап
+// const createPopupAddCard = new PopupWithForm (popupAddCard, handlerFormSubmitAddCard);
+// console.log(createPopupAddCard);
 // экземпляры класса валидации для форм
+
 const validFormEditProfile = new FormValidator(config, formEditProfile);
 const validFormAddCard = new FormValidator(config, formAddCard);
 
 validFormEditProfile.enableValidation();
 validFormAddCard.enableValidation();
+
+
+
 
 const openProfilePopup = function () {
   validFormEditProfile.resetValidation();
@@ -77,6 +90,7 @@ const closePopupClickEsc = function (evt) {
   }
 };
 
+// const popupWithImageCard = new PopupWithImage(popupPicture,)
 
 const handlerImageCardClick = (name, link) => {
   titlePopupPicture.textContent = name;
@@ -104,22 +118,34 @@ function handlerFormSubmitAddCard(evt) {
   formAddCard.reset();
 }
 
-const renderCard = (item) => {
-  cardPlace.prepend(createCard(item));
-};
+
+//экз.класса для отрисовки эл-в на странице
+const cardsList = new Section ({items: initialCards, 
+  renderer: (item) => {
+    const card = new Card(item, ".card-template", handlerImageCardClick);
+    const elementCard = card.generateCard();
+    cardsList.addItem(elementCard);
+  }
+}, ".places");
+
+cardsList.renderItems();
+
+// const renderCard = (item) => {
+//   cardPlace.prepend(createCard(item));
+// };
 
 // перебираем массив и для каждого эл-та создаем карточку и добавляем в разметку
-initialCards.forEach((item) => {
-  createCard(item);
-  renderCard(item);
-});
+// initialCards.forEach((item) => {
+//   createCard(item);
+//   renderCard(item);
+// });
 
 // создает карточку с данными и слушателями
-function createCard(item) {
-  const card = new Card(item, ".card-template", handlerImageCardClick);
-  const elementCard = card.generateCard(item);
-  return elementCard;
-}
+// function createCard(item) {
+//   const card = new Card(item, ".card-template", handlerImageCardClick);
+//   const elementCard = card.generateCard(item);
+//   return elementCard;
+// }
 
 popupEditProfileOpen.addEventListener("click", function () {
   openProfilePopup();
