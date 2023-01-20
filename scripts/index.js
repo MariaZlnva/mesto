@@ -97,7 +97,8 @@ const handlerImageCardClick = (name, link) => {
 function handlerFormSubmitProfile(dataForm) {
 
   userData.setUserInfo(dataForm);
-  
+ 
+
   popupProfileForm.close();
 }
 
