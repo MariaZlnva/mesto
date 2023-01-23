@@ -5,14 +5,15 @@
 export default class Section {
     constructor({items, renderer}, selectorPopup){
       this._initialArray = items; //массив карточек
-      this._renderer = renderer; //функция, отвечающая за создание и отрисовку данных на стран.
+      this._renderer = renderer; //функция, отвечающая за создание и отрисовку отдельного эл-та на странице
       this._container = document.querySelector(selectorPopup); //контейнер куда добавлять создан.эл-ты
     }
     // пуб.мет. к-рый отвеч за отрисовку всех эл-в.
     renderItems(){
-      this._initialArray.forEach(item => this._renderer(item)//вызываем renderer, передав item
+      this._initialArray.forEach(item => this._renderer(item)//вызываем renderer(отвечает за отрисовку каждого отдельного эл-та), передав item
       );
     }
+    
     // публ.метод к-рый принимает ДОМ-элемент и добавляет его в контейнер
     addItem(element){
       this._container.prepend(element);

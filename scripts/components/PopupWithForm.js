@@ -7,7 +7,7 @@ export default class PopupWithForm extends Popup {
 
   }
 
-  _getInputValues(){
+  _getInputValues(){//собирает данные полей формы
     this._inputs = this._popup.querySelectorAll(".popup__input");
   
     this._formValues = {};
@@ -22,11 +22,11 @@ export default class PopupWithForm extends Popup {
       evt.preventDefault();
       this._handlerSubmit(this._getInputValues());
     });
-    super.setEventListeners();
+    super.setEventListeners(); // вызываем родительский метод
   }
 
   close(){
-    super.close();
+    super.close(); // вызываем родительский метод
     this._popup.querySelector(".popup__form").reset();//очищаем форму при закрытии
 
 

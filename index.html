@@ -28,7 +28,7 @@
     </section>
   </main>
   <footer class="footer page__footer">
-    <p class="footer__copyright">© 2022 Mesto Russia</p>
+    <p class="footer__copyright">© 2023 Mesto Russia</p>
   </footer>
   <div class="popup popup_edit-profile">
     <div class="popup__content">
@@ -48,9 +48,9 @@
       <button aria-label="Закрыть" class="popup__close" type="button"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" novalidate name="aboutCard">
-        <input id="nameCard" class="popup__input popup__input_title" placeholder="Название" type="text" name="aboutCard" value="" minlength="2" maxlength="30" required>
+        <input id="nameCard" class="popup__input popup__input_title" placeholder="Название" type="text" name="cardName" value="" minlength="2" maxlength="30" required>
         <span id="nameCard-error" class="error"></span>
-        <input id="urlCard" class="popup__input popup__input_link" placeholder="Ссылка на картинку" type="url" name="aboutCard" value="" required>
+        <input id="urlCard" class="popup__input popup__input_link" placeholder="Ссылка на картинку" type="url" name="cardUrl" value="" required>
         <span id="urlCard-error" class="error"></span>
         <button class="popup__button" type="submit">Создать</button>
       </form>
@@ -73,9 +73,6 @@
       </div>
     </article>
   </template>
-  <!-- <script type = "module" src="./scripts/cards.js"></script> 
-  <script type = "module" src="./scripts/FormValidator.js"></script>
-  <script type = "module" src="./scripts/Card.js"></script> -->
   <script type = "module" src="./scripts/index.js"></script>
  </body>
 </html>

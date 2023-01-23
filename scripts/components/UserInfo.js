@@ -1,4 +1,4 @@
-
+//класс управляет отображением инф.о польз.на странице
 
 export default class UserInfo{
   constructor({userName, userAbout}){

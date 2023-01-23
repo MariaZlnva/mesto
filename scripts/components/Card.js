@@ -7,22 +7,24 @@ export default class Card {
     this._selector = templateSelector;
     this._handlerImageCardClick = handlerImageCardClick;
   }
-  // методы которые работают с разметкой, устанавливают слушателей событий
+  
 
   _getTemplate() {
+//забираем разметку с html  и клонируем документ
     const cardElement = document
       .querySelector(this._selector)
       .content.querySelector(".card")
       .cloneNode(true);
 
+// вернём DOM-элемент карточки
     return cardElement;
   }
-  // метод возвращает готовый элемент
-  generateCard() {
-    // записываем разметку в прив.поле_элемент, у др.эл-в появится доступ к ней
-    this._element = this._getTemplate();
 
-    // доб.данные элемента
+  // метод возвращает готовый элемент
+  generateCard() { 
+    this._element = this._getTemplate(); // записываем разметку в прив.поле_элемент, у др.эл-в появится доступ к ней
+
+    // доб.данные
     this._cardImage = this._element.querySelector(".card__image");
     
     this._element.querySelector(".card__title").textContent = this._name;
@@ -30,6 +32,7 @@ export default class Card {
     this._cardImage.alt = this._name;
     
     this._setEventListenersCard();
+    
     // возвращаем эл-т
     return this._element;
     
@@ -40,7 +43,6 @@ export default class Card {
     this._cardLikeButton = this._element.querySelector(".card__like");
     this._cardDeleteButton = this._element.querySelector(".card__delete");
     
-
     this._cardLikeButton.addEventListener("click", () => {
       this._handlerLikeButton();
     });
