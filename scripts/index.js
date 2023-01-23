@@ -75,8 +75,8 @@ const userData = new UserInfo({
 
 //созд.отд.карточку
 function renderCard(item) {
-  const card = new Card(item, ".card-template", () =>
-    handlerImageCardClick(item)
+  const card = new Card(item, ".card-template", (name, link) =>
+    handlerImageCardClick(name, link)
   );
   const elementCard = card.generateCard();
   cardsList.addItem(elementCard);
