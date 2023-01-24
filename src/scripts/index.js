@@ -75,23 +75,35 @@ const userData = new UserInfo({
 });
 
 //созд.отд.карточку
-function renderCard(item) {
+function createCard(item) {
   const card = new Card(item, ".card-template", (name, link) =>
-    handlerImageCardClick(name, link)
-  );
-  const elementCard = card.generateCard();
-  cardsList.addItem(elementCard);
+  handlerImageCardClick(name, link)
+);
+ const elementCard = card.generateCard();
+ return elementCard 
 }
+
+function renderCard(item) {
+  // const card = new Card(item, ".card-template", (name, link) =>
+  //   handlerImageCardClick(name, link)
+  // );
+  // const elementCard = card.generateCard();
+  cardsList.addItem(createCard(item));
+}
+
+const popupWithImageCard = new PopupWithImage(".popup_big-picture");
+popupWithImageCard.setEventListeners();
 
 //обраб.клика по фото
 const handlerImageCardClick = (name, link) => {
-  const popupWithImageCard = new PopupWithImage(
-    ".popup_big-picture",
-    name,
-    link
-  );
-  popupWithImageCard.open(titlePopupPicture, imagePopupPicture);
-  popupWithImageCard.setEventListeners();
+  // const popupWithImageCard = new PopupWithImage(
+  //   ".popup_big-picture",
+  //   name,
+  //   link
+  // );
+  // popupWithImageCard.open(titlePopupPicture, imagePopupPicture);
+  // popupWithImageCard.setEventListeners();
+  popupWithImageCard.open(name, link);
 };
 
 //обраб.клика по кнопке открытия попап-редактирвоания профиля
