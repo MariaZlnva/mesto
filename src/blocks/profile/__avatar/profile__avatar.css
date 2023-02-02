@@ -2,8 +2,8 @@
 .profile__avatar {
   width: 120px;
   border-radius: 50%;
-  grid-row-start: 1;
-  grid-row-end: 3;
+  /* grid-row-start: 1;
+  grid-row-end: 3; */
   cursor: pointer;
 
 }
