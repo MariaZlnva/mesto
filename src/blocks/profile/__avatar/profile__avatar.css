@@ -1,15 +1,23 @@
+@import url(../__edit-visible/profile__edit-visible.css);
 .profile__avatar {
   width: 120px;
   border-radius: 50%;
   grid-row-start: 1;
   grid-row-end: 3;
-  margin-right: 30px;
+  cursor: pointer;
+
 }
 
-@media screen and (max-width: 760px) {
-  .profile__avatar {
-    margin-right: 0;
-    margin-bottom: 30px;
-    align-self: center;
-  }
+.profile__avatar:hover {
+  opacity: 0.2;
+  transition: visibility .5s,opacity .6s;
+  visibility: visible;
+ 
 }
+
+.profile__avatar:hover +.profile__edit-visible {
+  display: block;
+  transition: visibility .0s,opacity .0s;
+  visibility: visible;
+}
+

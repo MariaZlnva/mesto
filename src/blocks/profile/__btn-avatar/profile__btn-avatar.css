@@ -1,0 +1,13 @@
+.profile__btn-avatar {
+
+  position: relative;
+  padding-right: 30px;
+}
+
+
+@media screen and (max-width: 760px) {
+  .profile__btn-avatar {
+    padding-right: 0px;
+    align-self: center;
+  }
+}

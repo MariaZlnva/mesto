@@ -5,14 +5,17 @@ import FormValidator from "./components/FormValidator.js";
 import Section from "./components/Section.js";
 import PopupWithForm from "./components/PopupWithForm.js";
 import PopupWithImage from "./components/PopupWithImage.js";
+import PopupWithSubmit from "./components/PopupWithSubmit.js";
 import UserInfo from "./components/UserInfo.js";
 
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const popupAddCard = document.querySelector(".popup_add-cards");
 const popupPicture = document.querySelector(".popup_big-picture");
+const popupDeleteCard = document.querySelector(".popup_delete-card");
 
 const btnEditProfile = document.querySelector(".profile__edit");
 const btnAddCard = document.querySelector(".profile__add");
+
 
 const formEditProfile = popupEditProfile.querySelector(".popup__form");
 const formAddCard = popupAddCard.querySelector(".popup__form");
@@ -84,25 +87,18 @@ function createCard(item) {
 }
 
 function renderCard(item) {
-  // const card = new Card(item, ".card-template", (name, link) =>
-  //   handlerImageCardClick(name, link)
-  // );
-  // const elementCard = card.generateCard();
   cardsList.addItem(createCard(item));
 }
 
 const popupWithImageCard = new PopupWithImage(".popup_big-picture");
 popupWithImageCard.setEventListeners();
 
+//экз.класса попап с подтвеждения
+const popupSubmitDelete = new PopupWithSubmit(".popup_delete-card");
+popupSubmitDelete.setEventListeners();
+
 //обраб.клика по фото
 const handlerImageCardClick = (name, link) => {
-  // const popupWithImageCard = new PopupWithImage(
-  //   ".popup_big-picture",
-  //   name,
-  //   link
-  // );
-  // popupWithImageCard.open(titlePopupPicture, imagePopupPicture);
-  // popupWithImageCard.setEventListeners();
   popupWithImageCard.open(name, link);
 };
 
@@ -122,4 +118,6 @@ btnAddCard.addEventListener("click", function () {
   validFormAddCard.resetValidation();
   popupAddCardForm.open();
 });
+
+
 

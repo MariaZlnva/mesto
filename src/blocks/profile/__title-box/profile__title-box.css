@@ -5,6 +5,7 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   padding-top: 14px;
+  
 }
 
 @media screen and (max-width: 760px) {
@@ -12,5 +13,6 @@
     margin-bottom: 8px;
     padding-top: 0px;
     margin-left: 23px;
+    margin-top: 30px;
   }
 }
