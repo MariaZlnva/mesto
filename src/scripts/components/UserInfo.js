@@ -1,9 +1,10 @@
 //класс управляет отображением инф.о польз.на странице
 
 export default class UserInfo{
-  constructor({userName, userAbout}){
+  constructor({userName, userAbout, userAvatar}){
     this._name = userName;
     this._about = userAbout;
+    this._avatar = userAvatar;
   }
 
   getUserInfo(){  
@@ -20,5 +21,9 @@ export default class UserInfo{
   setUserInfo({nameUser, aboutUser}){
     this._name.textContent = nameUser;
     this._about.textContent = aboutUser;
+  }
+
+  setAvatar(avatar) {
+    this._avatar.src = avatar;
   }
 }

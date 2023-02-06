@@ -46,54 +46,88 @@ const api = new Api ({
   idGroup: 'cohort-59'
 })
 
+//экз.класса данные юзера
+const userData = new UserInfo({userName: nameProfile, userAbout: infoProfile, userAvatar: avatar});
+
 api.getInitialData()
   .then((arg) => {
     const [infoUserServer, itemsServer] = arg;
-    console.log(infoUserServer)
-    // userData.setUserInfo(infoUserServer.name, infoUserServer.about)
-    nameProfile.textContent = infoUserServer.name;
-    infoProfile.textContent = infoUserServer.about;
-//отрис.эл-ты массива на страницe
-    cardsList.renderItems(itemsServer);
-  })
+    userData.setUserInfo({nameUser:infoUserServer.name, aboutUser:infoUserServer.about});// устанав.данные польз на странице
+    userData.setAvatar(infoUserServer.avatar);// устанав.аватар
+    userData.id = infoUserServer._id; // присваиваем id данного пользователя
 
+    cardsList.renderItems(itemsServer); // отрис.эл-ты массива на страницe
+
+//экз.класса - форма для изменения аватара
+    const popupChangeAvatar = new PopupWithForm(".popup_update-avatar", (dataForm) => {
+      api.changeAvatar(dataForm)//
+        .then(() => {
+          avatar.src = dataForm.avatarUrl;
+          popupChangeAvatar.close();
+          
+        })// Внутри handleFormSubmit этого попапа должна лежать логика вызова метода API, который примет новый адрес, отправит на сервер, дождется ответа. Перед зпросом не забудьте запустить прелодер, то есть как-то отобразить в интерфейсе что запрос ушел и в данный момент ожидается его ответ (в ТЗ тоже об этом сказано). После ответа сервера (если он ок), вам надо заменить картинку на фронте и отключить прелодер, а затем закрыть попап
+    });
+    popupChangeAvatar.setEventListeners();
+//обраб.клика по аватар
+    btnAvatar.addEventListener("click", function () {
+      popupChangeAvatar.open();
+      urlAvatarInput.value = avatar.src;  
+      validFormAvatar.resetValidation();
+    })
+
+// экз.класса - форма редак.профиля
+    const popupProfileForm = new PopupWithForm(".popup_edit-profile", (dataForm) => {
+      api.changeProfileData(dataForm)
+        .then(() => { 
+          userData.setUserInfo(dataForm);
+          popupProfileForm.close();
+        }) 
+    })
+    popupProfileForm.setEventListeners();
+
+//обраб.клика по кнопке открытия попап-редактирвоания профиля
+    btnEditProfile.addEventListener("click", function () {
+      popupProfileForm.open();
+
+      const user = userData.getUserInfo();
+      nameUserInput.value = user.nameInput;
+      infoUserInput.value = user.aboutInput;
+
+      validFormEditProfile.resetValidation();
+    });
+    
+// экз.класса - форма доб.карточки
+    const popupAddCardForm = new PopupWithForm(".popup_add-cards", (dataCard) => {
+      api.addNewCard(dataCard) 
+        .then(() => {
+          popupAddCardForm.close();
+          const data = {
+            name: dataCard.cardName,
+            link: dataCard.cardUrl,
+          };
+          renderCard(data);
+        })
+    });
+    popupAddCardForm.setEventListeners();
+//обраб.клика по кнопке открытия попап-добавления карточек
+    btnAddCard.addEventListener("click", function () {
+      validFormAddCard.resetValidation();
+      popupAddCardForm.open();
+    });
+
+  })
   .catch(()=> console.log('error'))
 
-  // экз.класса - форма редак.профиля
-  const popupProfileForm = new PopupWithForm(".popup_edit-profile", (dataForm) => {
-    api.changeProfileData(dataForm)
-      .then(res => console.log(res.json))
-      .then(() => { 
-        userData.setUserInfo(dataForm);
-        popupProfileForm.close();
-      }) 
-   })
-  popupProfileForm.setEventListeners();
-
- //обраб.клика по кнопке открытия попап-редактирвоания профиля
- btnEditProfile.addEventListener("click", function () {
-  popupProfileForm.open();
-
-  const user = userData.getUserInfo();
-  nameUserInput.value = user.nameInput;
-  infoUserInput.value = user.aboutInput;
-
-  validFormEditProfile.resetValidation();
-})
-
-  //экз.класса данные юзера
-  const userData = new UserInfo({
-    userName: nameProfile,
-    userAbout: infoProfile,
-  });
+  
+  
   
 
 
-  //экз.класса для отрисовки массива эл-в на странице
-  const cardsList = new Section(
-    {renderer: (item) => renderCard(item)},
-    ".places"
-  )
+//экз.класса для отрисовки массива эл-в на странице
+const cardsList = new Section(
+  {renderer: (item) => renderCard(item)},
+  ".places"
+)
 
 //созд.отд.карточку
 function createCard(item) {
@@ -104,12 +138,9 @@ function createCard(item) {
  return elementCard 
 }
 
-
 function renderCard(item) {
   cardsList.addItem(createCard(item));
 }
-
-// экземпляры классов
 
 const validFormEditProfile = new FormValidator(config, formEditProfile);
 validFormEditProfile.enableValidation();
@@ -133,18 +164,7 @@ validFormAvatar.enableValidation();
 
 
 
-// экз.класса - форма доб.карточки
-const popupAddCardForm = new PopupWithForm(".popup_add-cards", (dataCard) => {
-  popupAddCardForm.close();
 
-  const data = {
-    name: dataCard.cardName,
-    link: dataCard.cardUrl,
-  };
-  renderCard(data);
-});
-
-popupAddCardForm.setEventListeners();
 
 
 
@@ -153,43 +173,11 @@ const popupWithImageCard = new PopupWithImage(".popup_big-picture");
 popupWithImageCard.setEventListeners();
 
 
-//экз.класса - форма для изменения аватара
-const popupChangeAvatar = new PopupWithForm(".popup_update-avatar", (dataForm) => {
-  return fetch (('https://mesto.nomoreparties.co/v1/cohort-59/users/me/avatar'), {
-    method: 'PATCH',
-    body: JSON.stringify({
-      avatar: dataForm.avatarUrl,      
-    }),
-    headers: {
-      authorization: 'd9d74726-0f35-4f64-a4f4-3690ec473717',
-      "Content-Type": "application/json"
-    }    
-  })
-    .then((res) => {
-      popupChangeAvatar.close();
-      avatar.src = dataForm.avatarUrl;
-    })
-    .catch((err) => {
-      console.log('Ошибка. Запрос не выполнен');
-    })
-  
-  
 
-  // Внутри handleFormSubmit этого попапа должна лежать логика вызова метода API, который примет новый адрес, отправит на сервер, дождется ответа. Перед зпросом не забудьте запустить прелодер, то есть как-то отобразить в интерфейсе что запрос ушел и в данный момент ожидается его ответ (в ТЗ тоже об этом сказано). После ответа сервера (если он ок), вам надо заменить картинку на фронте и отключить прелодер, а затем закрыть попап
-}
-);
-popupChangeAvatar.setEventListeners();
 
 //экз.класса попап с подтвеждения
 const popupSubmitDelete = new PopupWithSubmit(".popup_delete-card");
 // popupSubmitDelete.setEventListeners();
-
-
-
-
-
-
-
 
 
 
@@ -200,20 +188,9 @@ const handlerImageCardClick = (name, link) => {
   popupWithImageCard.open(name, link);
 };
 
-//обраб.клика по аватар
-btnAvatar.addEventListener("click", function () {
-  popupChangeAvatar.open();
-  urlAvatarInput.value = avatar.src;  
-  validFormAvatar.resetValidation();
-})
 
 
 
-//обраб.клика по кнопке открытия попап-добавления карточек
-btnAddCard.addEventListener("click", function () {
-  validFormAddCard.resetValidation();
-  popupAddCardForm.open();
-});
 
 
 
