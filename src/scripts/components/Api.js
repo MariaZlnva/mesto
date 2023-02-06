@@ -9,16 +9,25 @@ export default class Api {
     return fetch (`${this._baseUrl}${this._idGroup}/users/me`, {
       headers: this._headers
     })
-    .then(res => res.json())
-    .catch((err) => console.log('error'))
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+  
   }
 
   getItemsServer(){
     return fetch (`${this._baseUrl}${this._idGroup}/cards`, {
       headers: this._headers
     })
-    .then(res => res.json())
-    .catch((err) => console.log('error'))
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
   }
 
   getInitialData(){
@@ -34,7 +43,12 @@ export default class Api {
         about: dataForm.aboutUser
       })
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
   }
 
   changeAvatar(dataForm){
@@ -44,6 +58,13 @@ export default class Api {
       avatar: dataForm.avatarUrl,      
     }),
     headers: this._headers
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
     })
   }
 
@@ -56,8 +77,27 @@ export default class Api {
       }),
       headers: this._headers
       })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+  }
+
+  deleteCard(cardId){
+    return fetch((`${this._baseUrl}${this._idGroup}/cards/${cardId}`), //Вместо cardId в URL нужно подставить параметр _id карточки, которую нужно удалить. _id каждой карточки есть в её JSON:
+    {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
   }
 }
 
 
-  

@@ -1,13 +1,17 @@
 // класс создает карточку с текстом и ссылкой на изображение
 
 export default class Card {
-  constructor(data, templateSelector, handlerImageCardClick) {
+  constructor(data, handlerImageCardClick, handlerLikeButton, handlerDeleteButton, templateSelector) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data._id;
     this._selector = templateSelector;
     this._handlerImageCardClick = handlerImageCardClick;
+    this._handlerLikeButton = handlerLikeButton;
+    this._handlerDeleteButton = handlerDeleteButton;
   }
-  
+  //{data, handlerImageCardClick, handlerLikeButton, handlerDeleteButton}, templateSelector)
+  // constructor(data, handlerImageCardClick, handlerLikeButton, handlerDeleteButton, templateSelector)
 
   _getTemplate() {
 //забираем разметку с html  и клонируем документ
@@ -44,11 +48,11 @@ export default class Card {
     this._cardDeleteButton = this._element.querySelector(".card__delete");
     
     this._cardLikeButton.addEventListener("click", () => {
-      this._handlerLikeButton();
+      this._handlerLikeButton(this._cardLikeButton);// передаем id карты
     });
 
     this._cardDeleteButton.addEventListener("click", () => {
-      this._handlerDeleteButton();
+      this._handlerDeleteButton(this._element);
     });
 
     this._cardImage.addEventListener("click", () => {
@@ -57,12 +61,16 @@ export default class Card {
   }
 
   // метод для обраб.like
-  _handlerLikeButton() {
-    this._cardLikeButton.classList.toggle("card_like-active");
-  }
+//   _handlerLikeButton() {
+//     this._cardLikeButton.classList.toggle("card_like-active");
+//   }
 
-  // метод для обраб.delete
-  _handlerDeleteButton() {
-    this._cardDeleteButton.closest(".card").remove();
-  }
+//   // метод для обраб.delete
+//   _handlerDeleteButton() {
+//     this._cardDeleteButton.closest(".card").remove();
+//   }
 }
+
+
+
+// По поводу внутренностей класса. Внутри вам необходимо создать публичные методы если чувствуете в них необходимость. Как вариант, вы можете создать, например, публичный метод для переопределения данных по всем лайкам текущей карточки. Это нужно для того чтобы после обновления вы могли получить новые данные по карточке, а затем вызвав публичный метод обновить какие-то внутренние свойства экземпляра класса. Также нужно создать приватный метод, который будет отвечать за наложение нужных классов на иконку лайка (логично, что его надо вызывать и при создании карточки, и при обновлении лайков)
