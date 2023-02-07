@@ -49,49 +49,64 @@ const api = new Api ({
 const userData = new UserInfo({userName: nameProfile, userAbout: infoProfile, userAvatar: avatar});
 const cardsList = new Section({renderer: (item) => renderCard(item)},".places");
 const popupProfileForm = new PopupWithForm(".popup_edit-profile", (dataForm) => {
+  popupProfileForm.setTextButton('Сохранение...')
   api.changeProfileData(dataForm)//отправляем данные с инпутов на сервер
     .then(() => { 
       userData.setUserInfo(dataForm);
       popupProfileForm.close();
     })
     .catch((err) => console.log('Error!!!'))
+    .finally(()=>{
+      popupProfileForm.setTextButton('Сохранить')
+    })
 });
 const popupAddCardForm = new PopupWithForm(".popup_add-cards", (dataCard) => {
+  popupAddCardForm.setTextButton('Сохранение...');
   api.addNewCard(dataCard) 
-    .then(() => {
+    .then((dataItem) => {
+      console.log(dataItem)// {name: ,link: , id: , owner:}
       popupAddCardForm.close();
-      const data = {
-        name: dataCard.cardName,
-        link: dataCard.cardUrl,
-      };
-      renderCard(data);
+      // const data = {
+      //   name: dataItem.name,//записали в name link  то что пришло с сервера
+      //   link: dataItem.link,
+      // };
+      renderCard(dataItem);
     })
     .catch((err) => console.log('Error!!!'))
+    .finally(()=>{
+      popupAddCardForm.setTextButton('Сохранить')
+    })
 });
-const popupChangeAvatar = new PopupWithForm(".popup_update-avatar", (dataForm) => {//новый url
-  // Внутри handleFormSubmit этого попапа должна лежать логика вызова метода API, который примет новый адрес, отправит на сервер, дождется ответа. Перед зпросом не забудьте запустить прелодер, то есть как-то отобразить в интерфейсе что запрос ушел и в данный момент ожидается его ответ (в ТЗ тоже об этом сказано). После ответа сервера (если он ок), вам надо заменить картинку на фронте и отключить прелодер, а затем закрыть попап
+const popupChangeAvatar = new PopupWithForm(".popup_update-avatar", (dataForm) => {
+  popupChangeAvatar.setTextButton('Сохранение...')
   api.changeAvatar(dataForm)//отправляем новые данные на сервер
     .then(() => {
       avatar.src = dataForm.avatarUrl;
       popupChangeAvatar.close();
     })
     .catch((err) => console.log('Error!!!'))
+    .finally(()=>{
+      popupChangeAvatar.setTextButton('Сохранить')
+    })
 });
 const popupWithImageCard = new PopupWithImage(".popup_big-picture");
-;
 const popupSubmitDelete = new PopupWithSubmit(".popup_delete-card");
 const validFormEditProfile = new FormValidator(config, formEditProfile);
 const validFormAddCard = new FormValidator(config, formAddCard);
 const validFormAvatar = new FormValidator(config, formUpdateAvatar);
 
+let userId;
+
 api.getInitialData()
+  // .then(res => {console.log('res =>', res)})
   .then((arg) => {
     const [infoUserServer, itemsServer] = arg;
     userData.setUserInfo({nameUser:infoUserServer.name, aboutUser:infoUserServer.about});// устанав.данные польз на странице
     userData.setAvatar(infoUserServer.avatar);// устанав.аватар
-    userData.id = infoUserServer._id; // присваиваем id данного пользователя
+    userId = infoUserServer._id; // присваиваем id данного пользователя 8883c346bad605f52f68e809 - его в карточку передаем
     cardsList.renderItems(itemsServer); // отрис.эл-ты массива на страницe
   })
+  
   .then(() => {
     //устанавливаем слушатели попапам
     popupChangeAvatar.setEventListeners();
@@ -129,80 +144,59 @@ api.getInitialData()
 
 
 
-// function createCard(item) {
-//   const card = new Card({
-//     item: {
-//       name: item.name, 
-//       link: item.link,
-//       id: item._id
-//     },
-//     handlerImageCardClick: (name, link) => { 
-//       popupWithImageCard.open(name, link) 
-//       },
-//       handlerLikeButton: (card) => {
-//       card.classList.toggle("card_like-active")
-//       },
-//       handlerDeleteButton: (card) => {
-//       card.closest(".card").remove()
-//       }
-//   }, ".card-template"
-//   );
-//     const elementCard = card.generateCard();
-//     return elementCard 
-// }
-
-
-//созд.отд.карточку
-function createCard(item) {
-  const card = new Card(
-    item, 
-    (name, link) => {popupWithImageCard.open(name, link)}, 
-    (card) => { card.classList.toggle("card_like-active")}, 
-    (card) => {
-      popupSubmitDelete.open();
-      card.closest(".card").remove();
-      popupSubmitDelete.close();
+function createCard(dataItem) {//{name: ,link: , _id: , owner:, likes: []}
+  const card = new Card({
+    userId,
+    dataItem: {
+      name: dataItem.name, 
+      link: dataItem.link,
+      _id: dataItem._id, // id самой карточки 
+      owner: dataItem.owner, // id создателя карточки 
+      likes: dataItem.likes
     },
-    ".card-template"
+    handlerImageCardClick: (name, link) => { 
+      popupWithImageCard.open(name, link) 
+    },
+    handlerLikeButton: (card) => {
+     card.classList.toggle("card_like-active")
+    },
+    handlerDeleteButton: (id) => {
+      popupSubmitDelete.open(
+        (() => {
+          api.deleteCard(id)
+            .then((res) => {
+              console.log(res);
+              card.deleteCard(id);
+              popupSubmitDelete.close();
+            })
+        })
+      );
+
+    }
+  }, ".card-template"
   );
-  const elementCard = card.generateCard();
-  return elementCard; 
-
+    const elementCard = card.generateCard();
+    return elementCard 
 }
-
-// function handlerSubmitConfirm(item){
-//   evt.preventDefault();
-//   item.closest(".card").remove();
-//   // api.deleteCard(item._id)
-//   // .then((res) => {
-//   //   console.log(res)
-//   //   item.closest(".card").remove()
-//   // })
-//   // .catch(() => console.log('ОШИБКА удаления карточки'))
-// }
 
 function renderCard(item) {
   cardsList.addItem(createCard(item));
 }
 
+function handlerSubmitConfirm(evt){
+  evt.preventDefault();
+  api.deleteCard(dataItem._id)
+    .then((res) => {
+        console.log(res)
+        card.deleteCard();
+  })
+    .catch(() => console.log('ОШИБКА удаления карточки'))
+}
 
 
 
-//экз.класса для отрисовки массива эл-в на странице
-// const cardsList = new Section(
-//   { items: initialCards, renderer: (item) => renderCard(item) },
-//   ".places"
-// );
-//отрис.эл-ты массива на страницу
-// cardsList.renderItems();
 
 
-
-
-//обраб.клика по фото
-// const handlerImageCardClick = (name, link) => {
-//   popupWithImageCard.open(name, link);
-// };
 
 
 

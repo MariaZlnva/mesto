@@ -1,18 +1,29 @@
 // класс создает карточку с текстом и ссылкой на изображение
 
 export default class Card {
-  constructor(data, handlerImageCardClick, handlerLikeButton, handlerDeleteButton, templateSelector) {
-    this._name = data.name;
-    this._link = data.link;
-    this._id = data._id;
+  constructor({userId, dataItem, handlerImageCardClick, handlerLikeButton, handlerDeleteButton}, templateSelector) {
+    this._userId = userId;
+    this._name = dataItem.name;
+    this._link = dataItem.link;
+    this._id = dataItem._id;
+    this._ownerId = dataItem.owner._id;
+    this._likes = dataItem.likes;
     this._selector = templateSelector;
     this._handlerImageCardClick = handlerImageCardClick;
     this._handlerLikeButton = handlerLikeButton;
     this._handlerDeleteButton = handlerDeleteButton;
-  }
-  //{data, handlerImageCardClick, handlerLikeButton, handlerDeleteButton}, templateSelector)
-  // constructor(data, handlerImageCardClick, handlerLikeButton, handlerDeleteButton, templateSelector)
 
+  }
+
+  _isOwner(){
+    if (this._ownerId === this._userId) {
+      return this._element;
+      } else {
+        this._element.querySelector(".card__delete").remove();
+        return this._element;
+      }
+
+  }
   _getTemplate() {
 //забираем разметку с html  и клонируем документ
     const cardElement = document
@@ -34,12 +45,13 @@ export default class Card {
     this._element.querySelector(".card__title").textContent = this._name;
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
-    
+    this._element.querySelector(".card__calcul-like").textContent = this._likes.length;
     this._setEventListenersCard();
-    
-    // возвращаем эл-т
+
+    this._isOwner();
+   
     return this._element;
-    
+   
   }
 
   // метод устанавливающий слушатели событий(лайка, корзины, открытия бол.картинки)
@@ -52,7 +64,7 @@ export default class Card {
     });
 
     this._cardDeleteButton.addEventListener("click", () => {
-      this._handlerDeleteButton(this._element);
+      this._handlerDeleteButton(this._id);
     });
 
     this._cardImage.addEventListener("click", () => {
@@ -65,12 +77,14 @@ export default class Card {
 //     this._cardLikeButton.classList.toggle("card_like-active");
 //   }
 
-//   // метод для обраб.delete
-//   _handlerDeleteButton() {
-//     this._cardDeleteButton.closest(".card").remove();
-//   }
+  // метод удаляет карточку
+  deleteCard() {
+    this._cardDeleteButton.closest(".card").remove();
+  }
+
+  
 }
 
-
+  
 
 // По поводу внутренностей класса. Внутри вам необходимо создать публичные методы если чувствуете в них необходимость. Как вариант, вы можете создать, например, публичный метод для переопределения данных по всем лайкам текущей карточки. Это нужно для того чтобы после обновления вы могли получить новые данные по карточке, а затем вызвав публичный метод обновить какие-то внутренние свойства экземпляра класса. Также нужно создать приватный метод, который будет отвечать за наложение нужных классов на иконку лайка (логично, что его надо вызывать и при создании карточки, и при обновлении лайков)
