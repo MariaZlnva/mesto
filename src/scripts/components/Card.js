@@ -49,7 +49,7 @@ export default class Card {
     this._setEventListenersCard();
 
     this._isOwner();
-   
+    this.isMyLike();
     return this._element;
    
   }
@@ -72,26 +72,31 @@ export default class Card {
     });
   }
 
+  // метод проверяет есть ли лайк usera
   hasLike(){
     return this._likes.some((like) => like._id === this._userId);
    }
-//
-disableLike(){
-  this._cardLikeButton.classList.remove("card_like-active");
-}
-activateLike(){
-  this._cardLikeButton.classList.toggle("card_like-active");
-}
 
-  // toggleLike(){
-  //   if (this._hasLike()){
-  //     this._cardLikeButton.classList.remove("card_like-active");
-  //   } else {
-  //     this._cardLikeButton.classList.add("card_like-active");
-  //   }
-  //   // this._cardLikeButton.classList.toggle("card_like-active");
-  // }
+   // актив.или дезактив. кнопку лайка
+  isMyLike(){
+    if (this.hasLike()) {
+      this._activateLike()
+    } else {
+      this._disableLike()
+      
+    }
+    return this._element;
+  }
 
+
+  _disableLike(){
+    this._cardLikeButton.classList.remove("card_like-active");
+  }
+  _activateLike(){
+    this._cardLikeButton.classList.toggle("card_like-active");
+  }
+
+// перезаписываем данные по лайкам
   updateLikes(updateData){
     this._likes = updateData.likes;
     this._element.querySelector(".card__calcul-like").textContent = this._likes.length;
@@ -107,4 +112,12 @@ activateLike(){
 
   
 
-// По поводу внутренностей класса. Внутри вам необходимо создать публичные методы если чувствуете в них необходимость. Как вариант, вы можете создать, например, публичный метод для переопределения данных по всем лайкам текущей карточки. Это нужно для того чтобы после обновления вы могли получить новые данные по карточке, а затем вызвав публичный метод обновить какие-то внутренние свойства экземпляра класса. Также нужно создать приватный метод, который будет отвечать за наложение нужных классов на иконку лайка (логично, что его надо вызывать и при создании карточки, и при обновлении лайков)
+
+  // toggleLike(){
+  //   if (this._hasLike()){
+  //     this._cardLikeButton.classList.remove("card_like-active");
+  //   } else {
+  //     this._cardLikeButton.classList.add("card_like-active");
+  //   }
+  //   // this._cardLikeButton.classList.toggle("card_like-active");
+  // }

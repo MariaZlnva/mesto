@@ -31,9 +31,11 @@ export default class Popup {
 			) {
 				this.close(evt.target);
 			}
-		});
-
-	
+		});	
 	}
+
+	setTextButton(text){
+    this._button.textContent = text;
+  }
 
 }

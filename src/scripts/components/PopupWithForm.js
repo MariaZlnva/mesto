@@ -16,11 +16,7 @@ export default class PopupWithForm extends Popup {
     return this._formValues;
    
   }
-
-setTextButton(text){
-  this._button.textContent = text;
-}
-
+  
   setEventListeners(){
     this._popup.addEventListener("submit", (evt) => {
       evt.preventDefault();

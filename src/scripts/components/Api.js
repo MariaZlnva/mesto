@@ -1,3 +1,5 @@
+//класс лписывает запросы к серверу
+
 export default class Api {
   constructor({baseUrl, headers, idGroup}){
     this._baseUrl = baseUrl, 
@@ -32,6 +34,7 @@ export default class Api {
 
   getInitialData(){
     return Promise.all([this.getInfoUserServer(), this.getItemsServer()])
+    
   }
 
   changeProfileData(dataForm) { 
