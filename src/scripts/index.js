@@ -143,7 +143,6 @@ api.getInitialData()
   .catch((err) => console.log('Error!!!'))
 
 
-
 function createCard(dataItem) {//{name: ,link: , _id: , owner:, likes: []}
   const card = new Card({
     userId,
@@ -157,8 +156,23 @@ function createCard(dataItem) {//{name: ,link: , _id: , owner:, likes: []}
     handlerImageCardClick: (name, link) => { 
       popupWithImageCard.open(name, link) 
     },
-    handlerLikeButton: (card) => {
-     card.classList.toggle("card_like-active")
+    handlerLikeButton: (id) => {
+      if (card.hasLike()){ //если true, то удаляем лайк
+          api.deleteLike(id)
+            .then((updateData) => {
+              card.updateLikes(updateData);
+              // card.toggleLike();
+              card.disableLike();
+            })
+            .catch((err) => console.log('Error delete like !!!'))
+        } else {
+            api.addLike(id)
+            .then((updateData) => {
+              card.updateLikes(updateData);
+              card.activateLike();
+            })
+            .catch((err) => console.log('Error add like !!!'))
+        }    
     },
     handlerDeleteButton: (id) => {
       popupSubmitDelete.open(
@@ -183,15 +197,15 @@ function renderCard(item) {
   cardsList.addItem(createCard(item));
 }
 
-function handlerSubmitConfirm(evt){
-  evt.preventDefault();
-  api.deleteCard(dataItem._id)
-    .then((res) => {
-        console.log(res)
-        card.deleteCard();
-  })
-    .catch(() => console.log('ОШИБКА удаления карточки'))
-}
+// function handlerSubmitConfirm(evt){
+//   evt.preventDefault();
+//   api.deleteCard(dataItem._id)
+//     .then((res) => {
+//         console.log(res)
+//         card.deleteCard();
+//   })
+//     .catch(() => console.log('ОШИБКА удаления карточки'))
+// }
 
 
 

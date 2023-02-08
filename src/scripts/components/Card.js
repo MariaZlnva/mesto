@@ -60,7 +60,7 @@ export default class Card {
     this._cardDeleteButton = this._element.querySelector(".card__delete");
     
     this._cardLikeButton.addEventListener("click", () => {
-      this._handlerLikeButton(this._cardLikeButton);// передаем id карты
+      this._handlerLikeButton(this._id);// передаем id карты
     });
 
     this._cardDeleteButton.addEventListener("click", () => {
@@ -72,17 +72,37 @@ export default class Card {
     });
   }
 
-  // метод для обраб.like
-//   _handlerLikeButton() {
-//     this._cardLikeButton.classList.toggle("card_like-active");
-//   }
+  hasLike(){
+    return this._likes.some((like) => like._id === this._userId);
+   }
+//
+disableLike(){
+  this._cardLikeButton.classList.remove("card_like-active");
+}
+activateLike(){
+  this._cardLikeButton.classList.toggle("card_like-active");
+}
+
+  // toggleLike(){
+  //   if (this._hasLike()){
+  //     this._cardLikeButton.classList.remove("card_like-active");
+  //   } else {
+  //     this._cardLikeButton.classList.add("card_like-active");
+  //   }
+  //   // this._cardLikeButton.classList.toggle("card_like-active");
+  // }
+
+  updateLikes(updateData){
+    this._likes = updateData.likes;
+    this._element.querySelector(".card__calcul-like").textContent = this._likes.length;
+  }
 
   // метод удаляет карточку
   deleteCard() {
     this._cardDeleteButton.closest(".card").remove();
   }
 
-  
+ 
 }
 
   
