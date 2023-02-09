@@ -72,15 +72,12 @@ const popupProfileForm = new PopupWithForm(
 );
 const popupAddCardForm = new PopupWithForm(".popup_add-cards", (dataCard) => {
   popupAddCardForm.setTextButton("Сохранение...");
+    // popupAddCardForm.renderLoading();//что указывать в параметрах при вызове? 
   api
     .addNewCard(dataCard)
     .then((dataItem) => {
       console.log(dataItem); // {name: ,link: , id: , owner:}
       popupAddCardForm.close();
-      // const data = {
-      //   name: dataItem.name,//записали в name link  то что пришло с сервера
-      //   link: dataItem.link,
-      // };
       renderCard(dataItem);
     })
     .catch((err) => console.log("Error add card!!!"))
@@ -194,13 +191,14 @@ function createCard(dataItem) {
         }
       },
       handlerDeleteButton: (id) => {
-        popupSubmitDelete.open(() => {
+        popupSubmitDelete.open();
+        popupSubmitDelete.setSubmitAction(() => {
           popupSubmitDelete.setTextButton("Удаление...");
           api
             .deleteCard(id)
             .then((res) => {
               console.log(res);
-              card.deleteCard(id);
+              card.deleteCard();
               popupSubmitDelete.close();
             })
             .catch((err) => console.log("Error delete card!!!"))
@@ -209,6 +207,22 @@ function createCard(dataItem) {
             });
         });
       },
+      // {
+      //   popupSubmitDelete.open(() => {
+      //     popupSubmitDelete.setTextButton("Удаление...");
+      //     api
+      //       .deleteCard(id)
+      //       .then((res) => {
+      //         console.log(res);
+      //         card.deleteCard(id);
+      //         popupSubmitDelete.close();
+      //       })
+      //       .catch((err) => console.log("Error delete card!!!"))
+      //       .finally(() => {
+      //         popupSubmitDelete.setTextButton("Да");
+      //       });
+      //   });
+      // }
     },
     ".card-template"
   );
