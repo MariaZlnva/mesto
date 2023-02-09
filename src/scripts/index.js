@@ -207,22 +207,6 @@ function createCard(dataItem) {
             });
         });
       },
-      // {
-      //   popupSubmitDelete.open(() => {
-      //     popupSubmitDelete.setTextButton("Удаление...");
-      //     api
-      //       .deleteCard(id)
-      //       .then((res) => {
-      //         console.log(res);
-      //         card.deleteCard(id);
-      //         popupSubmitDelete.close();
-      //       })
-      //       .catch((err) => console.log("Error delete card!!!"))
-      //       .finally(() => {
-      //         popupSubmitDelete.setTextButton("Да");
-      //       });
-      //   });
-      // }
     },
     ".card-template"
   );
