@@ -31,12 +31,12 @@ export default class PopupWithForm extends Popup {
     this._form.reset();//очищаем форму при закрытии
   }
 
-  renderLoading(isLoading, loadingText = "Сохранение..."){
-    if(isLoading) {
-      this._button.textContent = loadingText;
-    } else {
-      this._button.textContent = this._buttonText;
-    }
-  } 
+  // renderLoading(isLoading, loadingText = "Сохранение..."){
+  //   if(isLoading) {
+  //     this._button.textContent = loadingText;
+  //   } else {
+  //     this._button.textContent = this._buttonText;
+  //   }
+  // } 
 
 }
