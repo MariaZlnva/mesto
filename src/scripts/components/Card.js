@@ -107,6 +107,7 @@ export default class Card {
     this._cardDeleteButton.closest(".card").remove();
   }
 
+
  
 }
 
