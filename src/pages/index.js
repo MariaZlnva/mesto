@@ -86,8 +86,8 @@ const popupChangeAvatar = new PopupWithForm(
     popupChangeAvatar.renderLoading(true);
     api
       .changeAvatar(dataForm) //отправляем новые данные на сервер
-      .then(() => {
-        avatar.src = dataForm.avatarUrl;
+      .then((res) => {
+        userData.setUserInfo(res);
         popupChangeAvatar.close();
       })
       .catch((err) => console.log("Error change avatar!!!"))
