@@ -1,33 +1,29 @@
-import "../pages/index.css";
-import { initialCards, config } from "./constants.js";
-import Card from "./components/Card.js";
-import FormValidator from "./components/FormValidator.js";
-import Section from "./components/Section.js";
-import PopupWithForm from "./components/PopupWithForm.js";
-import PopupWithImage from "./components/PopupWithImage.js";
-import PopupWithSubmit from "./components/PopupWithSubmit.js";
-import UserInfo from "./components/UserInfo.js";
-import Api from "./components/Api.js";
+import "./index.css";
+import { initialCards, config } from "../scripts/constants.js";
+import Card from "../scripts/components/Card.js";
+import FormValidator from "../scripts/components/FormValidator.js";
+import Section from "../scripts/components/Section.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import PopupWithSubmit from "../scripts/components/PopupWithSubmit.js";
+import UserInfo from "../scripts/components/UserInfo.js";
+import Api from "../scripts/components/Api.js";
 import { data } from "autoprefixer";
 
-const popupEditProfile = document.querySelector(".popup_edit-profile");
-const popupAddCard = document.querySelector(".popup_add-cards");
-const popupUpdateAvatar = document.querySelector(".popup_update-avatar");
 
 const btnEditProfile = document.querySelector(".profile__edit");
 const btnAddCard = document.querySelector(".profile__add");
 const btnAvatar = document.querySelector(".profile__btn-avatar");
-const avatar = btnAvatar.querySelector(".profile__avatar");
 
-const formEditProfile = popupEditProfile.querySelector(".popup__form");
-const formAddCard = popupAddCard.querySelector(".popup__form");
-const formUpdateAvatar = popupUpdateAvatar.querySelector(".popup__form");
+
+const formEditProfile = document.forms.aboutUser;// получим формы через атрибут name
+const formAddCard = document.forms.aboutCard;
+const formUpdateAvatar = document.forms.imageAvatar;
 
 
 const nameProfile = document.querySelector(".profile__title");
 const infoProfile = document.querySelector(".profile__subtitle");
-
-const urlAvatarInput = formUpdateAvatar.querySelector(".popup__input_link");
+const avatar = btnAvatar.querySelector(".profile__avatar");
 
 const nameUserInput = formEditProfile.querySelector(".popup__input_name");
 const infoUserInput = formEditProfile.querySelector(".popup__input_info");
@@ -50,29 +46,28 @@ const userData = new UserInfo({
 });
 
 const cardsList = new Section(
-  { renderer: (item) => renderCard(item) },
+  { renderer: renderCard },
   ".places"
 );
 
 const popupProfileForm = new PopupWithForm(
   ".popup_edit-profile",
-  (dataForm) => {
-    popupProfileForm.setTextButton("Сохранение...");
+  (dataInput) => {
+    popupProfileForm.renderLoading(true);
     api
-      .changeProfileData(dataForm) //отправляем данные с инпутов на сервер
-      .then(() => {
-        userData.setUserInfo(dataForm);
+      .changeProfileData(dataInput) //отправляем данные с инпутов на сервер {about:, name: "", avatar, _id}
+      .then((res) => {
+        userData.setUserInfo(res);//res {name: 'ma', about: 'da', avatar}
         popupProfileForm.close();
       })
       .catch((err) => console.log("Error change profile data!!!"))
       .finally(() => {
-        popupProfileForm.setTextButton("Сохранить");
+        popupProfileForm.renderLoading(false);
       });
   }
 );
 const popupAddCardForm = new PopupWithForm(".popup_add-cards", (dataCard) => {
-  popupAddCardForm.setTextButton("Сохранение...");
-    // popupAddCardForm.renderLoading();//что указывать в параметрах при вызове? 
+    popupAddCardForm.renderLoading(true);
   api
     .addNewCard(dataCard)
     .then((dataItem) => {
@@ -82,13 +77,13 @@ const popupAddCardForm = new PopupWithForm(".popup_add-cards", (dataCard) => {
     })
     .catch((err) => console.log("Error add card!!!"))
     .finally(() => {
-      popupAddCardForm.setTextButton("Сохранить");
+      popupAddCardForm.renderLoading(false);
     });
 });
 const popupChangeAvatar = new PopupWithForm(
   ".popup_update-avatar",
-  (dataForm) => {
-    popupChangeAvatar.setTextButton("Сохранение...");
+  (dataForm) => {//данные с input
+    popupChangeAvatar.renderLoading(true);
     api
       .changeAvatar(dataForm) //отправляем новые данные на сервер
       .then(() => {
@@ -97,7 +92,7 @@ const popupChangeAvatar = new PopupWithForm(
       })
       .catch((err) => console.log("Error change avatar!!!"))
       .finally(() => {
-        popupChangeAvatar.setTextButton("Сохранить");
+        popupChangeAvatar.renderLoading(false);
       });
   }
 );
@@ -113,11 +108,8 @@ api
   .getInitialData()
   .then((arg) => {
     const [infoUserServer, itemsServer] = arg;
-    userData.setUserInfo({
-      nameUser: infoUserServer.name,
-      aboutUser: infoUserServer.about,
-    }); // устанав.данные польз на странице
-    userData.setAvatar(infoUserServer.avatar); // устанав.аватар
+    userData.setUserInfo(infoUserServer); // устанав.данные польз на странице 
+    //infoUserServer: {name: '', about: '', avatar: '', _id: '', cohort: ''}
     userId = infoUserServer._id; // присваиваем id данного пользователя - его в карточку передаем
     cardsList.renderItems(itemsServer); // отрис.эл-ты массива на страницe
   })
@@ -132,7 +124,6 @@ api
     //открытие попапов
     btnAvatar.addEventListener("click", function () {
       popupChangeAvatar.open();
-      urlAvatarInput.value = avatar.src;
       validFormAvatar.resetValidation();
     });
 

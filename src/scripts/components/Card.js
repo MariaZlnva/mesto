@@ -41,11 +41,12 @@ export default class Card {
 
     // доб.данные
     this._cardImage = this._element.querySelector(".card__image");
-    
+    this._calculLike = this._element.querySelector(".card__calcul-like");
+
     this._element.querySelector(".card__title").textContent = this._name;
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
-    this._element.querySelector(".card__calcul-like").textContent = this._likes.length;
+    this._calculLike.textContent = this._likes.length;
     this._setEventListenersCard();
 
     this._isOwner();
@@ -99,7 +100,7 @@ export default class Card {
 // перезаписываем данные по лайкам
   updateLikes(updateData){
     this._likes = updateData.likes;
-    this._element.querySelector(".card__calcul-like").textContent = this._likes.length;
+    this._calculLike.textContent = this._likes.length;
   }
 
   // метод удаляет карточку

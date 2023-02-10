@@ -3,6 +3,8 @@ export default class Popup {
   constructor(popupSelector) {
 		this._popup = document.querySelector(popupSelector);
 		this._handleEscClose = this._handleEscClose.bind(this);
+		this._button = this._popup.querySelector(".popup__button");
+		
   }
 
 	open(){
@@ -34,8 +36,6 @@ export default class Popup {
 		});	
 	}
 
-	setTextButton(text){
-    this._button.textContent = text;
-  }
+
 
 }
