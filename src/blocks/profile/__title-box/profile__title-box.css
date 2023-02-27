@@ -5,6 +5,7 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   padding-top: 14px;
+  padding-left: 30px;
   
 }
 
@@ -12,6 +13,7 @@
   .profile__title-box {
     margin-bottom: 8px;
     padding-top: 0px;
+    padding-left: 0px;
     margin-left: 23px;
     margin-top: 30px;
   }
